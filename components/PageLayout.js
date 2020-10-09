@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ProfilePopper({isOpen, profilePic, toggleLoading}) {
     const id = open ? 'simple-popper' : undefined;
+    const { sessionInfo } = useContext(AuthContext)
     const router = useRouter()
 
     function signOut() {
@@ -58,13 +59,13 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
             <Grow in={isOpen} style={{transformOrigin: 'top right'}}>
                 <Paper className="m-4" elevation={4}>
                     <List className="w-56">
-                        <ListItem className="w-full" button>
+                        <ListItem className="w-full" button onClick={() => router.push(`/profile/${sessionInfo.uid}`)} >
                             <ListItemText>View profile</ListItemText>
                         </ListItem>
                         <ListItem className="w-full" button>
                             <ListItemText>My projects</ListItemText>
                         </ListItem>
-                        <ListItem onClick={() => router.push(`/edit-profile`)} className="w-full" button>
+                        <ListItem className="w-full" button onClick={() => router.push(`/edit-profile`)}>
                             <ListItemText>Edit profile</ListItemText>
                         </ListItem>
                         <ListItem className="w-full" button onClick={signOut}>
