@@ -130,6 +130,7 @@ export default function ({children, isLoading}) {
 
         <div className="py-20 h-full">
             {children}
+            <div className="h-16"/>
         </div>
 
         <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
