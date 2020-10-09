@@ -10,7 +10,6 @@ export default class MyDocument extends Document {
                 <Head>
                     {/* PWA primary color */}
                     <meta name="theme-color" content={theme.palette.primary.main}/>
-                    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
                     <link
                         rel="stylesheet"
                         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -18,6 +17,8 @@ export default class MyDocument extends Document {
                     <link rel="stylesheet" href="https://use.typekit.net/rky7bud.css"/>
                     <link rel="stylesheet"
                           href="https://fonts.googleapis.com/css?family=Google+Sans"/>
+                    <link rel="stylesheet"
+                          href="https://fonts.googleapis.com/css?family=Roboto"/>
                 </Head>
                 <body>
                 <Main/>

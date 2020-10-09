@@ -10,7 +10,7 @@ const theme = createMuiTheme({
         h5: {
             fontFamily: [
                 'Google Sans',
-                'Inter var',
+                'Roboto',
                 '-apple-system',
                 'BlinkMacSystemFont',
                 '"Segoe UI"',
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
             ].join(','),
         },
         fontFamily: [
-            'Inter var',
+            'Roboto',
             '-apple-system',
             'BlinkMacSystemFont',
             '"Segoe UI"',
