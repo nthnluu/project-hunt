@@ -22,6 +22,7 @@ function ProfilePage ({pageData}) {
     const router = useRouter()
 
     // Form Data
+    const [nameString, setNameString] = useState(pageData ? pageData.name : "")
     const [githubLink, setGithubLink] = useState(pageData ? pageData.githubUrl : "")
     const [linkedinLink, setLinkedinLink] = useState(pageData ? pageData.linkedinUrl : "")
     const [twitterLink, setTwitterLink] = useState(pageData ? pageData.twitterUrl : "")
@@ -34,7 +35,14 @@ function ProfilePage ({pageData}) {
         // call this function to create the profile on FB
         toggleLoading(true)
 
+        if (nameString === ""){
+            toggleLoading(false);
+            alert("Name cannot be empty");
+            return;
+        }
+
         fb.firestore().collection("profiles").doc(sessionInfo.uid).set({
+            name: nameString, 
             githubUrl: githubLink, 
             linkedinUrl: linkedinLink, 
             twitterUrl: twitterLink,
@@ -43,10 +51,10 @@ function ProfilePage ({pageData}) {
             skills: skillArray
         })
             .then(function() {
-                router.push(`/profile`)
+                router.push(`/profile/${sessionInfo.uid}`);
             })
             .catch(function(error) {
-                toggleLoading(false)
+                toggleLoading(false);
             });
 
     }
@@ -54,6 +62,12 @@ function ProfilePage ({pageData}) {
     return <Container maxWidth="md" className="mb-16 mt-4">
         <h1 className="mb-6 text-3xl font-display ">Edit Profile</h1>
         <div className="space-y-4">
+
+        <div className="newProjectFormPanelGrid">
+            <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined" 
+                autoComplete="off" placeholder="John Doe"
+                value={nameString} onChange={event => setNameString(event.target.value)}/>
+        </div>
 
           <Paper variant="outlined">
             <Box p={4}>

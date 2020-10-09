@@ -59,7 +59,7 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
             <Grow in={isOpen} style={{transformOrigin: 'top right'}}>
                 <Paper className="m-4" elevation={4}>
                     <List className="w-56">
-                        <ListItem className="w-full" button onClick={() => router.push(`/Profile/${sessionInfo.uid}`)} >
+                        <ListItem className="w-full" button onClick={() => router.push(`/profile/${sessionInfo.uid}`)} >
                             <ListItemText>View profile</ListItemText>
                         </ListItem>
                         <ListItem className="w-full" button>
