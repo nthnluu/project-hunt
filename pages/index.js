@@ -29,7 +29,7 @@ export default function Index() {
     return (
         <>
             <NewProjectModal isOpen={newProjectModal} onClose={() => setNewProjectModal(false)}/>
-            <Fab onClick={() => setNewProjectModal(true)} color="primary" aria-label="add" variant="extended" style={{
+            {authState === 1 ? <Fab onClick={() => setNewProjectModal(true)} color="primary" aria-label="add" variant="extended" style={{
                 margin: 0,
                 top: 'auto',
                 right: 30,
@@ -38,7 +38,8 @@ export default function Index() {
                 position: 'fixed'
             }}>
                 <AddIcon className="mr-1"/> Create Project
-            </Fab>
+            </Fab> : null}
+
 
             <PageLayout>
                 <Container maxWidth="md">
