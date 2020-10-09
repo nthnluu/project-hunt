@@ -11,11 +11,11 @@ export default function () {
     const [pageData, setPageData] = useState()
 
     useEffect(() => {
+
         fb.firestore().collection("projects").doc(project_id)
             .onSnapshot(function(doc) {
                 setPageData(doc.data())
             });
-
 
     }, [])
 

@@ -58,10 +58,13 @@ export default function FullScreenDialog({isOpen, onClose}) {
 
     const router = useRouter()
     const {authState, sessionInfo} = useContext(AuthContext)
+
+
     function createProject() {
 
         const newId = nanoid(12)
         toggleLoading(true)
+
         fb.firestore().collection("projects").doc(newId).set({
             title: projectTitle,
             description: overview,

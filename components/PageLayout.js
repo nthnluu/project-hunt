@@ -54,9 +54,7 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
             .catch(() => toggleLoading(false))
     }
 
-    return (
-
-        <Popper id={id} open={true} anchorEl={profilePic.current}>
+    return (<Popper id={id} open={true} anchorEl={profilePic.current}>
             <Grow in={isOpen} style={{transformOrigin: 'top right'}}>
                 <Paper className="m-4" elevation={4}>
                     <List className="w-56">
