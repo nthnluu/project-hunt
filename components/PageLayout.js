@@ -58,7 +58,7 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
 
         <Popper id={id} open={true} anchorEl={profilePic.current}>
             <Grow in={isOpen} style={{ transformOrigin: 'top right' }}>
-                <Paper className="m-2" elevation={4}>
+                <Paper className="m-4" elevation={4}>
                     <List className="w-56">
                         <ListItem className="w-full" button>
                             <ListItemText>View profile</ListItemText>
