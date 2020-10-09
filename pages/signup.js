@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import fb from "../src/firebase-config";
 import {useRouter} from "next/router";
 import AuthContext from "../src/AuthContext";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 function Copyright() {
     return (
@@ -53,12 +54,15 @@ export default function SignUp() {
     const classes = useStyles();
     const router = useRouter();
     const [error, setError] = useState(false)
+    const [isLoading, toggleIsLoading] = useState(false)
 
     function signUp(event) {
         event.preventDefault()
         const email = event.target.email.value
         const password = event.target.password.value
         const name = event.target.name.value
+
+        toggleIsLoading(true)
 
 
         fb.auth().createUserWithEmailAndPassword(email, password)
@@ -70,17 +74,15 @@ export default function SignUp() {
                     .then(() => router.push('/'))
             })
             .catch(function (error) {
-                // Handle Errors here.
-                console.log(error.code);
-                console.log(error.message);
+                toggleIsLoading(false)
                 setError(true)
-                // ...
             });
 
 
     }
 
     const {authState} = useContext(AuthContext)
+
 
     // Prevents authenticated users from accessing this page
     if (authState === 1) {
@@ -90,6 +92,7 @@ export default function SignUp() {
 
     return (
         <>
+            <LinearProgress hidden={!isLoading}/>
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <div className={classes.paper}>
@@ -142,7 +145,7 @@ export default function SignUp() {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-
+                            disabled={isLoading}
                         >
                             Sign Up
                         </Button>
