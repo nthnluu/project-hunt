@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 export default function LabelBottomNavigation() {
   const classes = useStyles();
-  const [value, setValue] = React.useState('recents');
+  const [value, setValue] = React.useState('home');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -23,10 +23,10 @@ export default function LabelBottomNavigation() {
 
   return (
     <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
+      <BottomNavigationAction label="Recents" value="home" icon={<RestoreIcon />} />
+      <BottomNavigationAction label="Favorites" value="search" icon={<FavoriteIcon />} />
+      <BottomNavigationAction label="Nearby" value="profile" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Folder" value="menu" icon={<FolderIcon />} />
     </BottomNavigation>
   );
 }
