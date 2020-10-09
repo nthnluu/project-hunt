@@ -42,6 +42,8 @@ export default function () {
                     {pageData
                         ? <Box p={4}>
 
+                            <h1 className="mb-6 text-3xl font-display ">{ pageData.name }</h1>
+
                             <div className="newProjectFormPanelGrid">
                                 <div className="grid grid-cols-4">
                                     { pageData.githubUrl
