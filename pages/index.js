@@ -32,8 +32,8 @@ export default function Index() {
             {authState === 1 ? <Fab onClick={() => setNewProjectModal(true)} color="primary" aria-label="add" variant="extended" style={{
                 margin: 0,
                 top: 'auto',
-                right: 30,
-                bottom: 30,
+                right: 20,
+                bottom: 20,
                 left: 'auto',
                 position: 'fixed',
                 zIndex: 1000

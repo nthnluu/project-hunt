@@ -35,7 +35,7 @@ export default function () {
     });
 
     return <PageLayout>
-        <Container maxWidth="md" className="my-24">
+        <Container maxWidth="md" className="mt-4">
             <h1 className="mb-6 text-3xl font-display ">Basic Information</h1>
             <div className="space-y-4">
                 <Paper variant="outlined">
