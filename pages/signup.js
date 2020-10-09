@@ -60,19 +60,12 @@ export default function SignUp() {
         event.preventDefault()
         const email = event.target.email.value
         const password = event.target.password.value
-        const name = event.target.name.value
 
         toggleIsLoading(true)
 
 
         fb.auth().createUserWithEmailAndPassword(email, password)
-            .then(() => {
-                const user = fb.auth().currentUser;
-                user.updateProfile({
-                    displayName: name
-                })
-                    .then(() => router.push('/'))
-            })
+            .then(() => router.push('/'))
             .catch(function (error) {
                 toggleIsLoading(false)
                 setError(true)
@@ -101,18 +94,6 @@ export default function SignUp() {
                     </Typography>
                     <form className={classes.form} onSubmit={signUp} noValidate>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    autoComplete="name"
-                                    name="name"
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="name"
-                                    label="Name"
-                                    autoFocus
-                                />
-                            </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
