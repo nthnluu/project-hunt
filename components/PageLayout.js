@@ -92,13 +92,6 @@ export default function ({children, isLoading}) {
     useEffect(() => toggleLoading(isLoading), [isLoading])
 
     return <>
-        <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
-            <List className="w-64">
-                <ListItem button>
-                    <ListItemText>Hello</ListItemText>
-                </ListItem>
-            </List>
-        </Drawer>
         <AppBar position="fixed" className="border-b border-lightGray" elevation={0} color="inherit">
             <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit"
@@ -136,9 +129,17 @@ export default function ({children, isLoading}) {
             <LinearProgress hidden={!loading}/>
         </AppBar>
 
-        <div className="pt-20 overflow-y-scroll">
+        <div className="pt-20">
             {children}
         </div>
+
+        <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
+            <List className="w-64">
+                <ListItem button>
+                    <ListItemText>Hello</ListItemText>
+                </ListItem>
+            </List>
+        </Drawer>
 
     </>
 }
