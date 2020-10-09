@@ -64,8 +64,8 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
                         <ListItem className="w-full" button>
                             <ListItemText>My projects</ListItemText>
                         </ListItem>
-                        <ListItem className="w-full" button>
-                            <ListItemText>Account settings</ListItemText>
+                        <ListItem onClick={() => router.push(`/edit-profile`)} className="w-full" button>
+                            <ListItemText>Edit profile</ListItemText>
                         </ListItem>
                         <ListItem className="w-full" button onClick={signOut}>
                             <ListItemText>Sign out</ListItemText>
