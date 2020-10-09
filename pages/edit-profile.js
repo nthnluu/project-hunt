@@ -63,11 +63,18 @@ function ProfilePage ({pageData}) {
         <h1 className="mb-6 text-3xl font-display ">{pageData ? "Edit" : "Complete Your"} Profile</h1>
         <div className="space-y-4">
 
-        <div className="newProjectFormPanelGrid">
-            <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined" 
-                autoComplete="off" placeholder="John Doe"
-                value={nameString} onChange={event => setNameString(event.target.value)}/>
-        </div>
+
+
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h2 className="text-xl font-display">{"Full name"}</h2>
+                    <div className="newProjectFormPanelGrid">
+                        <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined"
+                                   autoComplete="off" placeholder="Max Goof"
+                                   value={nameString} onChange={event => setNameString(event.target.value)}/>
+                    </div>
+                </Box>
+            </Paper>
 
           <Paper variant="outlined">
             <Box p={4}>
@@ -95,9 +102,9 @@ function ProfilePage ({pageData}) {
           <Paper variant="outlined">
             <Box p={4}>
               <h2 className="text-xl font-display">{"Introduce yourself! Write your bio here."}</h2>
-              <div className="newProjectFormPanelGrid">
+              <div className="mt-8">
                 <TextField multiline id="outlined-basic" className="w-full" label="Biography" variant="outlined" 
-                  autoComplete="off" placeholder="I am a quirky human bean"a
+                  autoComplete="off" placeholder="I am a quirky human bean"
                   value={bioContents} onChange={event => setBioContents(event.target.value)}/>
               </div>
             </Box>
