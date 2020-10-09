@@ -52,14 +52,14 @@ function ProfilePage ({pageData}) {
     }
 
     return <Container maxWidth="md" className="mb-16 mt-4">
-        <h1 className="mb-6 text-3xl font-display ">Edit Profile</h1>
+        <h1 className="mb-6 text-3xl font-display ">{pageData ? "Edit" : "Complete Your"} Profile</h1>
         <div className="space-y-4">
 
           <Paper variant="outlined">
             <Box p={4}>
               <h2 className="text-xl font-display">{"Socials"}</h2>
               <div className="newProjectFormPanelGrid">
-              <TextField id="outlined-basic" className="w-full" label="Github" variant="outlined" 
+              <TextField id="outlined-basic" className="w-full" label="Github" variant="outlined"
                 autoComplete="off" placeholder="Start typing..."
                 value={githubLink} onChange={event => setGithubLink(event.target.value)}/>
 
@@ -93,7 +93,7 @@ function ProfilePage ({pageData}) {
             itemName="skill"
             value={skillArray} setValue={setSkillArray}/>
 
-          <Button onClick={createProfile} variant="contained" color="primary">Create</Button>
+          <Button onClick={createProfile} variant="contained" color="primary">Save</Button>
 
         </div>
       </Container>
