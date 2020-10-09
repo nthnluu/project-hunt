@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const classes = useStyles();
-    const router = useRouter()
+    const router = useRouter();
+    const [error, setError] = useState(false)
 
     function signUp(event) {
         event.preventDefault()
@@ -72,6 +73,7 @@ export default function SignUp() {
                 // Handle Errors here.
                 console.log(error.code);
                 console.log(error.message);
+                setError(true)
                 // ...
             });
 
@@ -91,9 +93,6 @@ export default function SignUp() {
             <Container component="main" maxWidth="xs">
                 <CssBaseline/>
                 <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
                     <Typography component="h1" variant="h5">
                         Welcome to Project Hunt
                     </Typography>
@@ -132,7 +131,9 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    error={error}
                                 />
+                                <p className="text-sm text-gray-600 mt-1">Must be at least 6 characters.</p>
                             </Grid>
                         </Grid>
                         <Button

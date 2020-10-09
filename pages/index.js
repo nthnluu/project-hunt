@@ -35,15 +35,15 @@ export default function Index() {
                 right: 30,
                 bottom: 30,
                 left: 'auto',
-                position: 'fixed'
+                position: 'fixed',
+                zIndex: 1000
             }}>
                 <AddIcon className="mr-1"/> Create Project
             </Fab> : null}
 
-
             <PageLayout>
                 <Container maxWidth="md">
-                    <ul className="space-y-4 mt-4">
+                    <ul className="space-y-4 mb-8">
                         {pageData.map(item => {
                             let data = item.data()
                             return <li>
