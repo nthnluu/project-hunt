@@ -99,7 +99,7 @@ export default function ({children, isLoading}) {
                 </ListItem>
             </List>
         </Drawer>
-        <AppBar position="fixed" className="border-b border-lightGray" elevation={0} color="inherit">
+        <AppBar position="static" className="border-b border-lightGray" elevation={0} color="inherit">
             <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit"
                             aria-label="menu" onClick={() => toggleDrawer(true)}>
@@ -136,7 +136,7 @@ export default function ({children, isLoading}) {
             <LinearProgress hidden={!loading}/>
         </AppBar>
 
-        <div className="pt-20">
+        <div className="pt-4">
             {children}
         </div>
 
