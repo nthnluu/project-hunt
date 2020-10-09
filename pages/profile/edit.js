@@ -15,10 +15,9 @@ import ProtectedRoute from "../../components/ProtectedRoute";
 //   },
 // }));
 
-export function ProfilePage({pageData}) {
+export function ProfilePage({pageData, toggleLoading}) {
 
     // const classes = useStyles();
-    const [isLoading, toggleLoading] = useState(false)
     const {sessionInfo} = useContext(AuthContext)
     const router = useRouter()
 
@@ -123,24 +122,25 @@ export function ProfilePage({pageData}) {
 
 export default function () {
     const {sessionInfo} = useContext(AuthContext)
-
+    if (!sessionInfo) return null
     const [isLoading, toggleLoading] = useState(true)
     const [pageData, setPageData] = useState(undefined)
 
 
+
     useEffect(() => {
-        fb.firestore().collection("profiles").doc(sessionInfo ? sessionInfo.uid : " ")
+        fb.firestore().collection("profiles").doc(sessionInfo.uid)
             .get()
             .then(function (snapshot) {
                 setPageData(snapshot.data())
                 toggleLoading(false)
             })
             .catch(() => toggleLoading(false));
-    }, [])
+    }, [sessionInfo])
 
 
     return <ProtectedRoute><PageLayout isLoading={isLoading}>
-        {!isLoading && <ProfilePage pageData={pageData}/>}
+        {!isLoading && <ProfilePage pageData={pageData} toggleLoading={toggleLoading}/>}
     </PageLayout></ProtectedRoute>
 }
 
