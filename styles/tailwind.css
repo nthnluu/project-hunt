@@ -1,0 +1,13 @@
+/* purgecss start ignore */
+@tailwind  base;
+@tailwind  components;
+button {
+    @apply focus:outline-none
+}
+
+.newProjectFormPanelGrid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6 mt-8
+}
+/* purgecss end ignore */
+
+@tailwind  utilities;
