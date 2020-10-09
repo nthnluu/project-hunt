@@ -49,15 +49,23 @@ const theme = createMuiTheme({
                 // Name of the rule
                 fontWeight: 600
             }
+        },
+        MuiFab: {
+            // Name of the styleSheet
+            root: {
+                // Name of the rule
+                fontWeight: 600,
+                background: 'linear-gradient(to right, #7b4397, #dc2430)'
+            }
         }
     },
     palette: {
         type: 'light',
         primary: {
-            main: '#4285F4',
+            main: '#702FDA',
         },
         secondary: {
-            main: '#19857b',
+            main: '#00FFFF',
         },
         error: {
             main: red.A400,

@@ -55,7 +55,7 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
             .catch(() => toggleLoading(false))
     }
 
-    return (<Popper id={id} open={true} anchorEl={profilePic.current}>
+    return (<Popper id={id} open={true} anchorEl={profilePic.current} className={!isOpen && "pointer-events-none"}>
             <Grow in={isOpen} style={{transformOrigin: 'top right'}}>
                 <Paper className="m-4" elevation={4}>
                     <List className="w-56">
@@ -137,7 +137,7 @@ export default function ({children, isLoading}) {
             <LinearProgress hidden={!loading}/>
         </AppBar>
 
-        <div className="pt-20">
+        <div className="pt-20 overflow-y-scroll">
             {children}
         </div>
 

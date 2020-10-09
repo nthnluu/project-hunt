@@ -1,6 +1,6 @@
 import {nanoid} from "nanoid";
 import fb from "../src/firebase-config";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import AuthContext from "../src/AuthContext";
 import {useRouter} from "next/router";
 import PageLayout from "../components/PageLayout";
@@ -14,7 +14,7 @@ import {TextField, Button, Container, Paper, Box, AppBar} from "@material-ui/cor
 //   },
 // }));
 
-export default function () {
+function ProfilePage ({pageData}) {
 
     // const classes = useStyles();
     const [isLoading, toggleLoading] = useState(false)
@@ -22,26 +22,23 @@ export default function () {
     const router = useRouter()
 
     // Form Data
-    const [githubLink, setGithubLink] = useState("")
-    const [linkedinLink, setLinkedinLink] = useState("")
-    const [twitterLink, setTwitterLink] = useState("")
-    const [websiteLink, setWebsiteLink] = useState("")
-    const [bioContents, setBioContents] = useState("")
-    const [skillArray, setSkillArray] = useState([])
+    const [githubLink, setGithubLink] = useState(pageData ? pageData.githubUrl : "")
+    const [linkedinLink, setLinkedinLink] = useState(pageData ? pageData.linkedinUrl : "")
+    const [twitterLink, setTwitterLink] = useState(pageData ? pageData.twitterUrl : "")
+    const [websiteLink, setWebsiteLink] = useState(pageData ? pageData.websiteUrl : "")
+    const [bioContents, setBioContents] = useState(pageData ? pageData.bio : "")
+    const [skillArray, setSkillArray] = useState(pageData ? pageData.skills : [])
 
 
     function createProfile() {
         // call this function to create the profile on FB
-
-
-        const newId = nanoid(12)
         toggleLoading(true)
 
-        fb.firestore().collection("profiles").doc(newId).set({
-            user: sessionInfo.uid,
+        fb.firestore().collection("profiles").doc(sessionInfo.uid).set({
             githubUrl: githubLink, 
             linkedinUrl: linkedinLink, 
-            twitterUrl: twitterLink, 
+            twitterUrl: twitterLink,
+            websiteUrl: websiteLink,
             bio: bioContents, 
             skills: skillArray
         })
@@ -54,8 +51,7 @@ export default function () {
 
     }
 
-    return <PageLayout isLoading={isLoading}>
-      <Container maxWidth="md" className="my-24">
+    return <Container maxWidth="md" className="mb-16 mt-4">
         <h1 className="mb-6 text-3xl font-display ">Edit Profile</h1>
         <div className="space-y-4">
 
@@ -97,10 +93,38 @@ export default function () {
             itemName="skill"
             value={skillArray} setValue={setSkillArray}/>
 
-          <Button onClick={createProfile}>Create</Button>
+          <Button onClick={createProfile} variant="contained" color="primary">Create</Button>
 
         </div>
       </Container>
+}
 
+
+export default function () {
+    const {sessionInfo} = useContext(AuthContext)
+    if (!sessionInfo) return null
+
+
+    const [isLoading, toggleLoading] = useState(true)
+    const [pageData, setPageData] = useState(undefined)
+
+
+
+
+    useEffect(() => {
+            fb.firestore().collection("profiles").doc(sessionInfo.uid)
+                .get()
+                .then(function (snapshot) {
+                    setPageData(snapshot.data())
+                    toggleLoading(false)
+                })
+                .catch(() => toggleLoading(false));
+    }, [])
+
+
+    return <PageLayout isLoading={isLoading}>
+        {!isLoading &&  <ProfilePage pageData={pageData}/>}
     </PageLayout>
 }
+
+
