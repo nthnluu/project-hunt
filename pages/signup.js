@@ -60,22 +60,21 @@ export default function SignUp() {
         const name = event.target.name.value
 
 
-        if (/@yahoo.com\s*$/.test(email)) {
-            fb.auth().createUserWithEmailAndPassword(email, password)
-                .then(() => {
-                    const user = fb.auth().currentUser;
-                    user.updateProfile({
-                        displayName: name
-                    })
-                        .then(() => router.push('/'))
+        fb.auth().createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                const user = fb.auth().currentUser;
+                user.updateProfile({
+                    displayName: name
                 })
-                .catch(function (error) {
-                    // Handle Errors here.
-                    console.log(error.code);
-                    console.log(error.message);
-                    // ...
-                });
-        }
+                    .then(() => router.push('/'))
+            })
+            .catch(function (error) {
+                // Handle Errors here.
+                console.log(error.code);
+                console.log(error.message);
+                // ...
+            });
+
 
     }
 
