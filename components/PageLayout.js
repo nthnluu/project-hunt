@@ -91,8 +91,8 @@ export default function ({children, isLoading}) {
 
     useEffect(() => toggleLoading(isLoading), [isLoading])
 
-    return <>
-        <AppBar position="fixed" className="border-b border-lightGray" elevation={0} color="inherit">
+    return <div className="h-screen">
+        <AppBar position="fixed" className="border-b border-lightGray relative" elevation={0} color="inherit">
             <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit"
                             aria-label="menu" onClick={() => toggleDrawer(true)}>
@@ -125,11 +125,10 @@ export default function ({children, isLoading}) {
                 <Button color="primary" variant="contained" onClick={() => router.push('/signup')}>Sign up</Button>
                 </span>}
             </Toolbar>
-
             <LinearProgress hidden={!loading}/>
         </AppBar>
 
-        <div className="pt-20">
+        <div className="pt-20 h-full">
             {children}
         </div>
 
@@ -141,5 +140,5 @@ export default function ({children, isLoading}) {
             </List>
         </Drawer>
 
-    </>
+    </div>
 }
