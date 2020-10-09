@@ -44,6 +44,7 @@ export default function () {
                         ? <Box p={4}>
 
                             <h1 className="mb-6 text-3xl font-display ">{pageData.name}</h1>
+                            <div> {`(Goes to ${pageData.institution})`} </div>
 
                             <div className="newProjectFormPanelGrid">
                                 <div className="grid grid-cols-4">
@@ -66,7 +67,7 @@ export default function () {
 
                                 <div>
                                     <h2 className="text-xl font-display">Bio: </h2>
-                                    <p>{pageData.bio} </p>
+                                    <p>{pageData.bio}</p>
                                 </div>
 
                                 <div className="w-full">

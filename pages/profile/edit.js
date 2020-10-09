@@ -8,6 +8,8 @@ import ArrayInputPanel from "../../components/modals/NewProjectModal/ArrayInputP
 import {TextField, Button, Container, Paper, Box, AppBar} from "@material-ui/core";
 import ProtectedRoute from "../../components/ProtectedRoute";
 
+import Autocomplete from "@material-ui/lab/Autocomplete";
+
 export function ProfilePage({pageData, toggleLoading}) {
 
     const {sessionInfo} = useContext(AuthContext)
@@ -23,9 +25,12 @@ export function ProfilePage({pageData, toggleLoading}) {
     const [skillArray, setSkillArray] = useState(pageData ? pageData.skills : [])
     const [noNameStatus, setNoNameStatus] = useState(false)
 
+    const [institutionString, setInstitutionString] = useState(pageData ? pageData.institution : "")
+    const listOfInstitutions = ["Brown University", "Rhode Island School of Design"];
+
     function createProfile() {
         // call this function to create the profile on FB
-        toggleLoading(true)
+        toggleLoading(true);
 
         if (nameString === "") {
             toggleLoading(false);
@@ -40,7 +45,8 @@ export function ProfilePage({pageData, toggleLoading}) {
             twitterUrl: twitterLink,
             websiteUrl: websiteLink,
             bio: bioContents,
-            skills: skillArray
+            skills: skillArray, 
+            institution: institutionString
         })
             .then(function () {
                 router.push(`/profile/${sessionInfo.uid}`);
@@ -109,9 +115,23 @@ export function ProfilePage({pageData, toggleLoading}) {
                 </Box>
             </Paper>
 
-            <ArrayInputPanel title="Tags (eg: Institution, skills, programming and foreign languages)"
+            <ArrayInputPanel title="Tags (eg: skills, programming and foreign languages)"
                              itemName="skill"
                              value={skillArray} setValue={setSkillArray}/>
+
+            <Autocomplete
+                className="form-item" options={listOfInstitutions} 
+                value={institutionString}
+                onChange={(event, value) => setInstitutionString(value)}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        label="Institution"
+                        placeholder="Choose your school"
+                        InputLabelProps={{ shrink: true }}
+                        variant="outlined" />
+                )}
+            />
 
             <Button onClick={createProfile} variant="contained" color="primary">Save</Button>
 
