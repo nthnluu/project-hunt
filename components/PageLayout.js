@@ -57,7 +57,7 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
     return (
 
         <Popper id={id} open={true} anchorEl={profilePic.current}>
-            <Grow in={isOpen} style={{ transformOrigin: 'top right' }}>
+            <Grow in={isOpen} style={{transformOrigin: 'top right'}}>
                 <Paper className="m-4" elevation={4}>
                     <List className="w-56">
                         <ListItem className="w-full" button>
@@ -107,21 +107,25 @@ export default function ({children, isLoading}) {
                             aria-label="menu" onClick={() => toggleDrawer(true)}>
                     <MenuIcon/>
                 </IconButton>
-                <Link href="/">
-                    <a className="text-xl font-bold flex-grow focus:text-gray-500 focus:outline-none">
+                <span className="flex-grow">
+                     <Link href="/">
+                    <a className="text-xl font-semibold focus:text-gray-500 hover:text-gray-700 focus:outline-none">
                         Project Hunt
                     </a>
                 </Link>
+                </span>
+
                 {authState === 1 ?
                     <ClickAwayListener onClickAway={() => toggleProfileDropdown(false)}>
 
                         <div>
                             <IconButton onClick={() => toggleProfileDropdown(!profileDropdown)} size="small">
                                 <Avatar
-                                        ref={profilePic}>{getInitialsFromName(sessionInfo ? sessionInfo.displayName : null)}</Avatar>
+                                    ref={profilePic}>{getInitialsFromName(sessionInfo ? sessionInfo.displayName : null)}</Avatar>
                             </IconButton>
 
-                            <ProfilePopper profilePic={profilePic} isOpen={profileDropdown} toggleLoading={toggleLoading}/>
+                            <ProfilePopper profilePic={profilePic} isOpen={profileDropdown}
+                                           toggleLoading={toggleLoading}/>
                         </div>
 
                     </ClickAwayListener> :
