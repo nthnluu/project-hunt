@@ -134,7 +134,7 @@ export default function ({children, isLoading}) {
             <LinearProgress hidden={!loading}/>
         </AppBar>
 
-        <div className="py-20 h-full">
+        <div className="py-24 h-full">
             {children}
             <div className="h-8"/>
         </div>
