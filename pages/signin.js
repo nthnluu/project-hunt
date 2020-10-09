@@ -17,6 +17,7 @@ import Copyright from "../src/Copyright";
 import fb from '../src/firebase-config'
 import {useRouter} from "next/router";
 import AuthContext from "../src/AuthContext";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,20 +54,21 @@ export default function SignInSide() {
     const classes = useStyles();
     const router = useRouter()
     const {authState} = useContext(AuthContext)
+    const [isLoading, toggleLoading] = useState(false)
+    const [errorMessage, setError] = useState()
 
     function signIn(event) {
         event.preventDefault()
 
         const email = event.target.email.value
         const password = event.target.password.value
+
+        toggleLoading(true)
         fb.auth().signInWithEmailAndPassword(email, password)
             .then(() => router.push('/'))
             .catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode + errorMessage)
-                // ...
+                setError(true)
+                toggleLoading(false)
             });
     }
 
@@ -81,6 +83,7 @@ export default function SignInSide() {
             <CssBaseline/>
             <Grid item xs={false} sm={4} md={7} className={classes.image}/>
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                <LinearProgress hidden={!isLoading}/>
                 <div className="my-24 md:my-64">
                     <Container maxWidth="sm">
                         <div className={classes.paper}>
@@ -97,6 +100,7 @@ export default function SignInSide() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    error={errorMessage}
                                     autoFocus
                                 />
                                 <TextField
@@ -108,17 +112,17 @@ export default function SignInSide() {
                                     label="Password"
                                     type="password"
                                     id="password"
+                                    error={errorMessage}
                                     autoComplete="current-password"
                                 />
-                                <FormControlLabel
-                                    control={<Checkbox value="remember" color="primary"/>}
-                                    label="Remember me"
-                                />
+                                {errorMessage ? <Typography color="error" variant="body1">Invalid email or password.</Typography> : null}
+
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
                                     color="primary"
+                                    disabled={isLoading}
                                     className={classes.submit}
                                 >
                                     Sign In
