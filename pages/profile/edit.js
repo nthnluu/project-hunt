@@ -1,10 +1,10 @@
 import {nanoid} from "nanoid";
-import fb from "../src/firebase-config";
+import fb from "../../src/firebase-config";
 import React, {useContext, useEffect, useState} from "react";
-import AuthContext from "../src/AuthContext";
+import AuthContext from "../../src/AuthContext";
 import {useRouter} from "next/router";
-import PageLayout from "../components/PageLayout";
-import ArrayInputPanel from "../components/modals/NewProjectModal/ArrayInputPanel";
+import PageLayout from "../../components/PageLayout";
+import ArrayInputPanel from "../../components/modals/NewProjectModal/ArrayInputPanel";
 import {TextField, Button, Container, Paper, Box, AppBar} from "@material-ui/core";
 // import {makeStyles} from '@material-ui/core/styles';
 
@@ -14,7 +14,7 @@ import {TextField, Button, Container, Paper, Box, AppBar} from "@material-ui/cor
 //   },
 // }));
 
-function ProfilePage ({pageData}) {
+export function ProfilePage ({pageData}) {
 
     // const classes = useStyles();
     const [isLoading, toggleLoading] = useState(false)

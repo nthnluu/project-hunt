@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ProfilePopper({isOpen, profilePic, toggleLoading}) {
+function ProfilePopper({isOpen, profilePic, toggleLoading, onClose}) {
     const id = open ? 'simple-popper' : undefined;
     const { sessionInfo } = useContext(AuthContext)
     const router = useRouter()
@@ -55,17 +55,22 @@ function ProfilePopper({isOpen, profilePic, toggleLoading}) {
             .catch(() => toggleLoading(false))
     }
 
+    function navigateToPage(route) {
+        onClose()
+        router.push(route)
+    }
+
     return (<Popper id={id} open={true} anchorEl={profilePic.current} className={!isOpen && "pointer-events-none"}>
             <Grow in={isOpen} style={{transformOrigin: 'top right'}}>
-                <Paper className="m-4" elevation={4}>
+                <Paper className="m-5" elevation={4}>
                     <List className="w-56">
-                        <ListItem className="w-full" button onClick={() => router.push(`/profile/${sessionInfo.uid}`)} >
+                        <ListItem className="w-full" button onClick={() => navigateToPage(`/profile/${sessionInfo.uid}`)} >
                             <ListItemText>View profile</ListItemText>
                         </ListItem>
-                        <ListItem className="w-full" button>
+                        <ListItem className="w-full" button >
                             <ListItemText>My projects</ListItemText>
                         </ListItem>
-                        <ListItem className="w-full" button onClick={() => router.push(`/edit-profile`)}>
+                        <ListItem className="w-full" button onClick={() => navigateToPage(`/profile/edit`)}>
                             <ListItemText>Edit profile</ListItemText>
                         </ListItem>
                         <ListItem className="w-full" button onClick={signOut}>
@@ -116,7 +121,7 @@ export default function ({children, isLoading}) {
                                     ref={profilePic}>{getInitialsFromName(sessionInfo ? sessionInfo.displayName : null)}</Avatar>
                             </IconButton>
 
-                            <ProfilePopper profilePic={profilePic} isOpen={profileDropdown}
+                            <ProfilePopper onClose={() => toggleProfileDropdown(false)} profilePic={profilePic} isOpen={profileDropdown}
                                            toggleLoading={toggleLoading}/>
                         </div>
 

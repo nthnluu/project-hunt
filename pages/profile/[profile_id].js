@@ -5,17 +5,18 @@ import AuthContext from "../../src/AuthContext";
 import {useRouter} from "next/router";
 import PageLayout from "../../components/PageLayout";
 import ArrayInputPanel from "../../components/modals/NewProjectModal/ArrayInputPanel";
-import { Chip, Container, Paper, Box } from '@material-ui/core'
+import {Chip, Container, Paper, Box} from '@material-ui/core'
 
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import WebIcon from '@material-ui/icons/Web';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 export default function () {
 
     const router = useRouter();
-    const { profile_id } = router.query;
+    const {profile_id} = router.query;
 
     // Form Data
     const [pageData, setPageData] = useState()
@@ -29,12 +30,12 @@ export default function () {
 
     useEffect(() => {
         fb.firestore().collection("profiles").doc(profile_id)
-            .onSnapshot(function(doc) {
+            .onSnapshot(function (doc) {
                 setPageData(doc.data())
             });
     });
 
-    return <PageLayout>
+    return <ProtectedRoute><PageLayout>
         <Container maxWidth="md" className="mt-4">
             <h1 className="mb-6 text-3xl font-display ">Basic Information</h1>
             <div className="space-y-4">
@@ -42,36 +43,36 @@ export default function () {
                     {pageData
                         ? <Box p={4}>
 
-                            <h1 className="mb-6 text-3xl font-display ">{ pageData.name }</h1>
+                            <h1 className="mb-6 text-3xl font-display ">{pageData.name}</h1>
 
                             <div className="newProjectFormPanelGrid">
                                 <div className="grid grid-cols-4">
-                                    { pageData.githubUrl
+                                    {pageData.githubUrl
                                         ? <a href={pageData.githubUrl}><GitHubIcon fontSize="large"/></a>
-                                        : <p/> }
+                                        : <p/>}
 
-                                    { pageData.twitterUrl
+                                    {pageData.twitterUrl
                                         ? <a href={pageData.twitterUrl}><TwitterIcon fontSize="large"/></a>
-                                        : <p/> }
+                                        : <p/>}
 
-                                    { pageData.websiteUrl
+                                    {pageData.websiteUrl
                                         ? <a href={pageData.websiteUrl}><WebIcon fontSize="large"/></a>
-                                        : <p/> }
+                                        : <p/>}
 
-                                    { pageData.linkedinUrl
+                                    {pageData.linkedinUrl
                                         ? <a href={pageData.linkedinUrl}><LinkedInIcon fontSize="large"/></a>
-                                        : <p/> }
+                                        : <p/>}
                                 </div>
 
                                 <div>
                                     <h2 className="text-xl font-display">Bio: </h2>
-                                    <p>{ pageData.bio } </p>
+                                    <p>{pageData.bio} </p>
                                 </div>
 
                                 <div className="w-full">
-                                    { pageData.skills.map((skill, index) =>
-                                            <Chip key={skill.id}
-                                                label={skill.value} variant="outlined" className="mr-2 mb-2"/>)
+                                    {pageData.skills.map((skill, index) =>
+                                        <Chip key={skill.id}
+                                              label={skill.value} variant="outlined" className="mr-2 mb-2"/>)
                                     }
                                 </div>
                             </div>
@@ -79,9 +80,10 @@ export default function () {
                         </Box>
                         : <Box/>
                     }
-                </Paper> 
+                </Paper>
             </div>
         </Container>
 
     </PageLayout>
+    </ProtectedRoute>
 }
