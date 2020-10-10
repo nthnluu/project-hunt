@@ -6,44 +6,35 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 
-export default function AlternateTimeline() {
-
+export default function OutlinedTimeline() {
   return (
     <Timeline align="alternate">
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot variant="outlined" />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>
-          First Task
-        </TimelineContent>
+        <TimelineContent>Eat</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot variant="outlined" color="primary" />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>
-          Second Task
-        </TimelineContent>
+        <TimelineContent>Code</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot variant="outlined" color="secondary" />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>
-            Third Task
-        </TimelineContent>
+        <TimelineContent>Sleep</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot variant="outlined" />
         </TimelineSeparator>
-        <TimelineContent>
-            Final Task
-        </TimelineContent>
+        <TimelineContent>Repeat</TimelineContent>
       </TimelineItem>
     </Timeline>
   );
