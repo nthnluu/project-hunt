@@ -14,6 +14,7 @@ import WebIcon from '@material-ui/icons/Web';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import ProtectedRoute from "../../components/ProtectedRoute";
 import TagChip from "../../components/TagChip";
+import UserProjects from "../../components/UserProjects";
 
 export default function () {
 
@@ -102,6 +103,7 @@ export default function () {
                     </Box>}
                 </Paper>
 
+                <UserProjects profile_id={profile_id}/>
 
             </div>
         </Container>

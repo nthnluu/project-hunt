@@ -77,9 +77,6 @@ function ProfilePopper({isOpen, profilePic, toggleLoading, onClose}) {
                         <ListItem className="w-full" button onClick={() => navigateToPage(`/profile/${sessionInfo.uid}`)} >
                             <ListItemText>View profile</ListItemText>
                         </ListItem>
-                        <ListItem className="w-full" button >
-                            <ListItemText>My projects</ListItemText>
-                        </ListItem>
                         <ListItem className="w-full" button onClick={() => navigateToPage(`/profile/edit`)}>
                             <ListItemText>Edit profile</ListItemText>
                         </ListItem>
