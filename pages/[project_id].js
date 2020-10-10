@@ -2,6 +2,7 @@ import {useRouter} from 'next/router'
 import {useEffect, useState} from "react";
 import fb from "../src/firebase-config";
 import PageLayout from "../components/PageLayout";
+import DisplayCreator from "../components/DisplayCreator.js";
 import {Button, Container} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -14,19 +15,14 @@ export default function () {
 
     const [isLoading, toggleLoading] = useState(true)
     const [pageData, setPageData] = useState()
-    // const [creatorData, setCreatorData] = useState()
 
     useEffect(() => {
         fb.firestore().collection("projects").doc(project_id)
             .onSnapshot(function (doc) {
                 setPageData(doc.data())
                 toggleLoading(false)
-            });
+            })
     }, [])
-
-    function navToCreator(){
-        router.push(`/profile/${pageData.created_by}`);
-    }
 
     return <PageLayout isLoading={isLoading}>
         {!isLoading && <Container maxWidth="md" className="space-y-4">
@@ -34,7 +30,7 @@ export default function () {
                 <Box p={4}>
                     <h1 className="text-4xl font-display font-semibold text-gray-900">{pageData.title}</h1>
                     <p className="text-gray-700 text-lg mt-2">{pageData.description}</p>
-                    <Button onClick={navToCreator} variant="contained" color="primary">{pageData.created_by}</Button> 
+                    <DisplayCreator profile_id={pageData.created_by}/>
                 </Box>
             </Paper>
 
