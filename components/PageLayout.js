@@ -151,9 +151,9 @@ export default function ({children, isLoading}) {
 
         <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
             <List className="w-64">
-                <ListItem button>
-                    <ListItemText>Hello</ListItemText>
-                </ListItem>
+                <ListItem button onClick={() => navigateToPage(`/Faq`)}>
+                    <ListItemText>FAQ</ListItemText>
+                </ListItem>    
             </List>
         </Drawer>
 
