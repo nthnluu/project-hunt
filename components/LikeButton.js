@@ -5,25 +5,30 @@ import Box from "@material-ui/core/Box";
 import React, {useContext, useEffect, useState} from "react";
 import fb from "../src/firebase-config";
 import AuthContext from "../src/AuthContext";
+import {useRouter} from "next/router";
 
 export default function ({projectId}) {
-    const {sessionInfo} = useContext(AuthContext)
-    const [isLiked, toggleLiked] = useState(true)
+    const {sessionInfo, authState} = useContext(AuthContext)
+    const [isLiked, toggleLiked] = useState(false)
     const [isLoading, toggleLoading] = useState(true)
+    const router = useRouter()
 
     const [totalLikes, setTotalLikes] = useState("Like")
 
     useEffect(() => {
-
-        fb.firestore().collection("projects").doc(projectId).collection("likes").doc(sessionInfo.uid)
-            .onSnapshot(function (doc) {
-                toggleLoading(false)
-                if (doc.data()) {
-                    toggleLiked(true)
-                } else {
-                    toggleLiked(false)
-                }
-            });
+        if (authState === 1) {
+            fb.firestore().collection("projects").doc(projectId).collection("likes").doc(sessionInfo.uid)
+                .onSnapshot(function (doc) {
+                    toggleLoading(false)
+                    if (doc.data()) {
+                        toggleLiked(true)
+                    } else {
+                        toggleLiked(false)
+                    }
+                });
+        } else {
+            toggleLoading(false)
+        }
 
         fb.firestore().collection("projects").doc(projectId).collection("likes")
             .onSnapshot(function (doc) {
@@ -33,28 +38,33 @@ export default function ({projectId}) {
     }, [])
 
     function likeProject() {
-        toggleLoading(true)
-        if (!isLiked) {
-            fb.firestore().collection("projects").doc(projectId).collection("likes").doc(sessionInfo.uid).set({
-                liked_at: new Date()
-            })
-                .then(function() {
-                    toggleLiked(true)
-                    toggleLoading(false)
-                })
-                .catch(function(error) {
-                    toggleLoading(false)
-                });
+        if (authState !== 1) {
+            router.push('/signup')
         } else {
-            fb.firestore().collection("projects").doc(projectId).collection("likes").doc(sessionInfo.uid).delete()
-                .then(function() {
-                    toggleLiked(false)
-                    toggleLoading(false)
+            toggleLoading(true)
+            if (!isLiked) {
+                fb.firestore().collection("projects").doc(projectId).collection("likes").doc(sessionInfo.uid).set({
+                    liked_at: new Date()
                 })
-                .catch(function(error) {
-                    toggleLoading(false)
-                });
+                    .then(function() {
+                        toggleLiked(true)
+                        toggleLoading(false)
+                    })
+                    .catch(function(error) {
+                        toggleLoading(false)
+                    });
+            } else {
+                fb.firestore().collection("projects").doc(projectId).collection("likes").doc(sessionInfo.uid).delete()
+                    .then(function() {
+                        toggleLiked(false)
+                        toggleLoading(false)
+                    })
+                    .catch(function(error) {
+                        toggleLoading(false)
+                    });
+            }
         }
+
     }
 
     return  <Button

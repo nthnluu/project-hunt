@@ -13,6 +13,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FullScreenDialog from "../components/modals/NewProjectModal";
 import AuthContext from "../src/AuthContext";
 import LikeButton from "../components/LikeButton";
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
 
 export default function () {
@@ -42,23 +43,26 @@ export default function () {
                 <Box p={4}>
                     <h1 className="text-4xl font-display font-semibold text-gray-800">{pageData.title}</h1>
                     <p className="text-gray-700 text-lg mt-2 mb-4">{pageData.description}</p>
-                   <LikeButton projectId={project_id}/>
-                    <Button
-                        size="120"
-                        startIcon={<StarBorderIcon/>}
-                    >
+                    <Box mx={-1}>
+                        <LikeButton projectId={project_id}/>
+                        <Button
+                            size="120"
+                            className="opacity-75"
+                            startIcon={<InsertEmoticonIcon/>}
+                        >
 
-                        I'm Interested
-                    </Button>
-                    {pageData.created_by === sessionInfo.uid ? <Button
-                        color="primary"
-                        size="120"
-                        onClick={() => toggleEditProjectModal(true)}
-                    >
-                        Edit
-                    </Button> : null}
-
+                            I'm In
+                        </Button>
+                        {pageData.created_by === sessionInfo.uid ? <Button
+                            color="primary"
+                            size="120"
+                            onClick={() => toggleEditProjectModal(true)}
+                        >
+                            Edit
+                        </Button> : null}
+                    </Box>
                 </Box>
+
             </Paper>
 
             <Paper variant="outlined">
