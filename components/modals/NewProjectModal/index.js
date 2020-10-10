@@ -46,6 +46,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
     const [category, setCategory] = useState("Student Initiative")
     const [overview, setOverview] = useState("")
     const [timeCommitment, setTimeCommitment] = useState("1-2 hours")
+    const [timeline1, setTimeline1] = useState( "")
     const [skillArray, setSkillArray] = useState([])
     const [softwareArray, setSoftwareArray] = useState([])
     const [languagesArray, setLanguagesArray] = useState([])
@@ -65,6 +66,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             setCategory(pageData.category)
             setOverview(pageData.description)
             setTimeCommitment(pageData.timeCommitment)
+            setTimeline1(pageData.timeline1)
             setSkillArray(pageData.skills)
             setSoftwareArray(pageData.software)
             setLanguagesArray(pageData.languages)
@@ -82,6 +84,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             description: overview,
             category: category,
             timeCommitment: timeCommitment,
+            timeline1: timeline1,
             skills: skillArray,
             software: softwareArray,
             languages: languagesArray,
@@ -186,6 +189,23 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
 
 
                         </Paper>
+
+                        <Paper variant="outlined">
+                            <Box p={4}>
+                                <h2 className="text-xl font-display">Timeline</h2>
+                                <div className="newProjectFormPanelGrid">
+                                    <FormControl variant="outlined">
+                                        <div>
+                                            <TextField id="outlined-basic" label="First meeting Date"
+                                               variant="outlined" value={timeline1}
+                                             onChange={event => setTimeline1(event.target.value)}/>
+                                        </div>
+                                    </FormControl>
+                                    <div className="w-full"/>
+                                </div>
+                            </Box>
+                        </Paper>
+
 
                        <ArrayInputPanel title="Skills I'm looking for"
                                         itemName="skill"
