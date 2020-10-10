@@ -10,6 +10,8 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
 import {useRouter} from "next/router";
 import NewProjectModal from '../components/modals/NewProjectModal'
+import LikeButton from "../components/LikeButton";
+import BigSearchField from "../components/BigSearchField";
 
 
 export default function Index() {
@@ -43,10 +45,19 @@ export default function Index() {
 
             <PageLayout>
                 <Container maxWidth="md">
-                    <ul className="space-y-4 mb-8">
+                    <Box mt={6} mb={8} >
+                        <h1 className="text-2xl mx-6 md:mx-0 md:text-5xl font-semibold text-center font-display text-gray-800">
+                            Share ideas with your classmates and make amazing things happen</h1>
+                        <div className="my-12">
+                            <BigSearchField/>
+                        </div>
+
+                    </Box>
+
+                    <ul className="space-y-4 mb-8 mt-24">
                         {pageData.map(item => {
                             let data = item.data()
-                            return <li>
+                            return <li key={item.id}>
                                 <Paper variant="outlined" key={item.id} className="overflow-none">
                                     <CardActionArea onClick={() => router.push(`/${item.id}`)}>
                                         <Box p={4}>
@@ -56,6 +67,9 @@ export default function Index() {
                                                 {data.description}</Typography>
                                         </Box>
                                     </CardActionArea>
+                                    <Box mx={3} mb={2}>
+                                        <LikeButton projectId={item.id}/>
+                                    </Box>
                                 </Paper>
 
                             </li>

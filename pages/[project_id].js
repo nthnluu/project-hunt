@@ -1,5 +1,5 @@
 import {useRouter} from 'next/router'
-import {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import fb from "../src/firebase-config";
 import PageLayout from "../components/PageLayout";
 import DisplayCreator from "../components/DisplayCreator.js";
@@ -7,14 +7,23 @@ import {Button, Container} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
+import SaveIcon from '@material-ui/icons/Save';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import FullScreenDialog from "../components/modals/NewProjectModal";
+import AuthContext from "../src/AuthContext";
+import LikeButton from "../components/LikeButton";
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 
 
 export default function () {
     const router = useRouter()
     const {project_id} = router.query
+    const {sessionInfo, authState} = useContext(AuthContext)
 
     const [isLoading, toggleLoading] = useState(true)
     const [pageData, setPageData] = useState()
+    const [editProjectModal, toggleEditProjectModal] = useState(false)
 
     useEffect(() => {
         fb.firestore().collection("projects").doc(project_id)
@@ -24,14 +33,35 @@ export default function () {
             })
     }, [])
 
-    return <PageLayout isLoading={isLoading}>
+    return <>
+        <FullScreenDialog projectId={project_id} isOpen={editProjectModal} onClose={() => toggleEditProjectModal(false)} pageData={pageData}/>
+        <PageLayout isLoading={isLoading}>
         {!isLoading && <Container maxWidth="md" className="space-y-4">
             <Paper variant="outlined">
                 <Box p={4}>
                     <h1 className="text-4xl font-display font-semibold text-gray-900">{pageData.title}</h1>
                     <p className="text-gray-700 text-lg mt-2">{pageData.description}</p>
                     <DisplayCreator profile_id={pageData.created_by}/>
+                    <Box mx={-1}>
+                        <LikeButton projectId={project_id}/>
+
+                        {authState === 1 && ((pageData.created_by === sessionInfo.uid) ? <Button
+                            color="primary"
+                            size="120"
+                            onClick={() => toggleEditProjectModal(true)}
+                        >
+                            Edit
+                        </Button> : <Button
+                            size="120"
+                            className="opacity-75"
+                            startIcon={<InsertEmoticonIcon/>}
+                        >
+
+                            I'm In
+                        </Button>)}
+                    </Box>
                 </Box>
+
             </Paper>
 
             <Paper variant="outlined">
@@ -64,11 +94,19 @@ export default function () {
                 </Box>
             </Paper>
 
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h1 className="text-2xl font-display">Time commitment</h1>
+                    <p className="mt-4 text-xl text-gray-700">{pageData.timeCommitment} per week</p>
+                </Box>
+            </Paper>
+
 
         </Container>}
 
 
     </PageLayout>
+    </>
 
 
 }
