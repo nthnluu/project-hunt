@@ -12,6 +12,8 @@ import {useRouter} from "next/router";
 import NewProjectModal from '../components/modals/NewProjectModal'
 import LikeButton from "../components/LikeButton";
 import BigSearchField from "../components/BigSearchField";
+import ImInButton from "../components/ImInButton";
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 
 export default function Index() {
@@ -31,25 +33,27 @@ export default function Index() {
     return (
         <>
             <NewProjectModal isOpen={newProjectModal} onClose={() => setNewProjectModal(false)}/>
-            {authState === 1 ? <Fab onClick={() => setNewProjectModal(true)} color="primary" aria-label="add" variant="extended" style={{
-                margin: 0,
-                top: 'auto',
-                right: 20,
-                bottom: 20,
-                left: 'auto',
-                position: 'fixed',
-                zIndex: 1000
-            }}>
-                <AddIcon className="mr-1"/> Create Project
-            </Fab> : null}
+            {authState === 1 ?
+                <Fab onClick={() => setNewProjectModal(true)} color="primary" aria-label="add" variant="extended"
+                     style={{
+                         margin: 0,
+                         top: 'auto',
+                         right: 20,
+                         bottom: 20,
+                         left: 'auto',
+                         position: 'fixed',
+                         zIndex: 1000
+                     }}>
+                    <AddIcon className="mr-1"/> Create Project
+                </Fab> : null}
 
             <PageLayout>
                 <Container maxWidth="md">
-                    <Box mt={6} mb={8} >
+                    <Box mt={6} mb={8}>
                         <h1 className="text-2xl mx-6 md:mx-0 md:text-5xl font-semibold text-center font-display text-gray-800">
                             Share ideas with your classmates and make amazing things happen</h1>
                         <div className="my-12">
-                           <BigSearchField/>
+                            <BigSearchField/>
                         </div>
 
                     </Box>
@@ -68,7 +72,10 @@ export default function Index() {
                                         </Box>
                                     </CardActionArea>
                                     <Box mx={3} mb={2}>
-                                        <LikeButton projectId={item.id}/>
+                                        <span className="mr-2">
+                                             <LikeButton projectId={item.id}/>
+                                        </span>
+                                        <ImInButton projectId={item.id}/>
                                     </Box>
                                 </Paper>
 

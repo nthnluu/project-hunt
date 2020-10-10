@@ -12,6 +12,8 @@ import LikeButton from "../components/LikeButton";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import TagChip from "../components/TagChip";
 import OutlinedTimeline from "../components/Timeline";
+import ImInButton from "../components/ImInButton";
+
 
 export default function () {
     const router = useRouter()
@@ -32,6 +34,8 @@ export default function () {
 
     }, [])
 
+
+
     return <>
         <FullScreenDialog projectId={project_id} isOpen={editProjectModal} onClose={() => toggleEditProjectModal(false)} pageData={pageData}/>
         <PageLayout isLoading={isLoading}>
@@ -41,7 +45,10 @@ export default function () {
                     <h1 className="text-4xl font-display font-semibold text-gray-800">{pageData.title}</h1>
                     <p className="text-gray-700 text-lg mt-2 mb-4">{pageData.description}</p>
                     <Box mx={-1}>
-                        <LikeButton projectId={project_id}/>
+                        <span className="mr-2">
+                            <LikeButton projectId={project_id}/>
+                        </span>
+
 
                         {authState === 1 && ((pageData.created_by === sessionInfo.uid) ? <Button
                             color="primary"
@@ -49,14 +56,7 @@ export default function () {
                             onClick={() => toggleEditProjectModal(true)}
                         >
                             Edit
-                        </Button> : <Button
-                            size="120"
-                            className="opacity-75"
-                            startIcon={<InsertEmoticonIcon/>}
-                        >
-
-                            I'm In
-                        </Button>)}
+                        </Button> : <ImInButton projectId={project_id}/>)}
                     </Box>
                 </Box>
 
