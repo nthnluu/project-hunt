@@ -95,6 +95,10 @@ export default function () {
                     <p className="mt-4 text-xl text-gray-700">{pageData.timeCommitment} per week</p>
                 </Box>
             </Paper>
+    
+            <Paper>
+                <AlternateTimeline/>
+            </Paper>
 
 
         </Container>}
