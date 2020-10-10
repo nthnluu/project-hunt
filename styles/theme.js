@@ -65,14 +65,14 @@ const theme = createMuiTheme({
             main: '#702FDA',
         },
         secondary: {
-            main: '#00FFFF',
+            main: '#ea3f3f',
         },
         error: {
             main: red.A400,
         },
         background: {
             default: '#fff',
-        }
+        },
     },
 });
 
