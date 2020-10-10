@@ -22,6 +22,7 @@ import {nanoid} from "nanoid";
 import fb from "../../../src/firebase-config";
 import AuthContext from "../../../src/AuthContext";
 import {useRouter} from "next/router";
+import {TextField} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -205,6 +206,9 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                 </div>
                             </Box>
                         </Paper>
+
+
+
 
 
                        <ArrayInputPanel title="Skills I'm looking for"
