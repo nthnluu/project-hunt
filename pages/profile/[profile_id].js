@@ -63,7 +63,7 @@ export default function () {
                         <div className="grid grid-cols-2">
                             <h1 className="mb-6 text-3xl font-display ">{pageData.name}</h1>
 
-                            {(profile_id != sessionInfo.uid) && 
+                            {(profile_id !== sessionInfo.uid) &&
                                     ((pageData.followingUsers && pageData.followingUsers.includes(profile_id))
                                         ? <Button onClick={followUser} variant="contained" color="primary">Follow</Button> 
                                         : <Button variant="contained" color="secondary">Following</Button>) }
@@ -101,6 +101,8 @@ export default function () {
 
                     </Box>}
                 </Paper>
+
+
             </div>
         </Container>
 

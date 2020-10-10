@@ -69,7 +69,7 @@ export default function ({projectId}) {
 
     return  <Button
         color={isLiked ?  "secondary" : "inherit"}
-        size="120"
+        size="100"
         disabled={isLoading}
         onClick={likeProject}
         startIcon={isLiked ? <FavoriteIcon/> : <FavoriteBorderIcon/>}

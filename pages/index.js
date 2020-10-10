@@ -17,7 +17,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 
 export default function Index() {
-    const {authState} = useContext(AuthContext)
+    const {authState, sessionInfo} = useContext(AuthContext)
     const [pageData, setPageData] = useState([])
     const [newProjectModal, setNewProjectModal] = useState(false)
 
@@ -72,13 +72,15 @@ export default function Index() {
                                         </Box>
                                     </CardActionArea>
                                     <Box mx={3} mb={2}>
+
                                         <span className="mr-2">
                                              <LikeButton projectId={item.id}/>
                                         </span>
-                                        <ImInButton projectId={item.id}/>
+
+                                        {authState === 1 && ((data.created_by === sessionInfo.uid) ? null : <ImInButton projectId={item.id}/>)}
+
                                     </Box>
                                 </Paper>
-
                             </li>
                         })}
                     </ul>
@@ -86,6 +88,5 @@ export default function Index() {
             </PageLayout>
         </>
 
-    )
-        ;
+    );
 }

@@ -2,7 +2,7 @@ import {useRouter} from 'next/router'
 import React, {useContext, useEffect, useState} from "react";
 import fb from "../src/firebase-config";
 import PageLayout from "../components/PageLayout";
-import {Container} from "@material-ui/core";
+import {Container, Divider} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -13,6 +13,10 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import TagChip from "../components/TagChip";
 import OutlinedTimeline from "../components/Timeline";
 import ImInButton from "../components/ImInButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ParticipantList from "../components/ParticipantList";
 
 
 export default function () {
@@ -31,6 +35,7 @@ export default function () {
                 setPageData(doc.data())
                 toggleLoading(false)
             });
+
 
     }, [])
 
@@ -52,7 +57,7 @@ export default function () {
 
                         {authState === 1 && ((pageData.created_by === sessionInfo.uid) ? <Button
                             color="primary"
-                            size="120"
+                            size="100"
                             onClick={() => toggleEditProjectModal(true)}
                         >
                             Edit
@@ -102,6 +107,8 @@ export default function () {
                     <OutlinedTimeline/>
                 </Box>                
             </Paper>
+
+            <ParticipantList projectId={project_id}/>
 
 
         </Container>}
