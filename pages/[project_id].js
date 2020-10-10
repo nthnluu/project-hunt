@@ -11,7 +11,7 @@ import AuthContext from "../src/AuthContext";
 import LikeButton from "../components/LikeButton";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import TagChip from "../components/TagChip";
-import AlternateTimeline from "../components/Timeline";
+import OutlinedTimeline from "../components/Timeline";
 
 export default function () {
     const router = useRouter()
@@ -99,7 +99,7 @@ export default function () {
             <Paper variant="outlined">
                 <Box p={4}>
                     <h1 className="text-2xl font-display">Timeline</h1>
-                    <AlternateTimeline/>
+                    <OutlinedTimeline/>
                 </Box>                
             </Paper>
 
