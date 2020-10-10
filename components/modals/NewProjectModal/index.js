@@ -22,7 +22,7 @@ import {nanoid} from "nanoid";
 import fb from "../../../src/firebase-config";
 import AuthContext from "../../../src/AuthContext";
 import {useRouter} from "next/router";
-
+import DatePickers from "../components/DatePicker";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -199,12 +199,13 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                 <h2 className="text-xl font-display">Timeline</h2>
                                 <div className="newProjectFormPanelGrid">
                                     <FormControl variant="outlined">
-                                            <TextField id="outlined-basic" label="First meeting Date"
+                                            <DatePickers/>
+                                            <TextField id="outlined-basic" label="First meeting"
                                                variant="outlined" value={timeline1}
                                              onChange={event => setTimeline1(event.target.value)}/>
                                     </FormControl>  
                                     <FormControl variant="outlined">
-                                            <TextField id="outlined-basic" label="Project Duedate"
+                                            <TextField id="outlined-basic" label="Project Due"
                                                variant="outlined" value={timeline2}
                                              onChange={event => setTimeline2(event.target.value)}/>
                                     </FormControl>
