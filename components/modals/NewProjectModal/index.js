@@ -68,6 +68,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             setOverview(pageData.description)
             setTimeCommitment(pageData.timeCommitment)
             setTimeline1(pageData.timeline1)
+            setTimeline2(pageData.timeline2)
             setSkillArray(pageData.skills)
             setSoftwareArray(pageData.software)
             setLanguagesArray(pageData.languages)
@@ -86,6 +87,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             category: category,
             timeCommitment: timeCommitment,
             timeline1: timeline1,
+            timeline2: timeline2,
             skills: skillArray,
             software: softwareArray,
             languages: languagesArray,
@@ -200,6 +202,11 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                             <TextField id="outlined-basic" label="First meeting Date"
                                                variant="outlined" value={timeline1}
                                              onChange={event => setTimeline1(event.target.value)}/>
+                                        </div>
+                                        <div>
+                                            <TextField id="outlined-basic" label="Project Duedate"
+                                               variant="outlined" value={timeline2}
+                                             onChange={event => setTimeline2(event.target.value)}/>
                                         </div>
                                     </FormControl>
                                     <div className="w-full"/>
