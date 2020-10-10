@@ -204,12 +204,13 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                                variant="outlined" value={timeline1}
                                              onChange={event => setTimeline1(event.target.value)}/>
                                         </div>
-                                        <div>
+                                    </FormControl>  
+                                    <FormControl variant="outlined">
                                             <TextField id="outlined-basic" label="Project Duedate"
                                                variant="outlined" value={timeline2}
                                              onChange={event => setTimeline2(event.target.value)}/>
-                                        </div>
                                     </FormControl>
+                                    
                                     <div className="w-full"/>
                                 </div>
                             </Box>
