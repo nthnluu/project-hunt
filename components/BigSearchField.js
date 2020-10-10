@@ -72,7 +72,10 @@ const SearchBar = ({currentRefinement, refine, hitCards, prefilledTerm}) => {
                 <CustomHits/>
             </div>}
 
-            {hitCards}
+            <ul className="mt-4">
+                {hitCards}
+            </ul>
+
 
 
         </div>
