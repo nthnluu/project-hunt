@@ -199,11 +199,9 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                 <h2 className="text-xl font-display">Timeline</h2>
                                 <div className="newProjectFormPanelGrid">
                                     <FormControl variant="outlined">
-                                        <div>
                                             <TextField id="outlined-basic" label="First meeting Date"
                                                variant="outlined" value={timeline1}
                                              onChange={event => setTimeline1(event.target.value)}/>
-                                        </div>
                                     </FormControl>  
                                     <FormControl variant="outlined">
                                             <TextField id="outlined-basic" label="Project Duedate"
