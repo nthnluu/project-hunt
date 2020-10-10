@@ -22,7 +22,7 @@ import {nanoid} from "nanoid";
 import fb from "../../../src/firebase-config";
 import AuthContext from "../../../src/AuthContext";
 import {useRouter} from "next/router";
-import DatePickers from "../components/DatePicker";
+
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
