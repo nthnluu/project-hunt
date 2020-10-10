@@ -19,7 +19,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 export default function () {
     const router = useRouter()
     const {project_id} = router.query
-    const {sessionInfo} = useContext(AuthContext)
+    const {sessionInfo, authState} = useContext(AuthContext)
 
     const [isLoading, toggleLoading] = useState(true)
     const [pageData, setPageData] = useState()
@@ -45,21 +45,21 @@ export default function () {
                     <p className="text-gray-700 text-lg mt-2 mb-4">{pageData.description}</p>
                     <Box mx={-1}>
                         <LikeButton projectId={project_id}/>
-                        <Button
+
+                        {authState === 1 && ((pageData.created_by === sessionInfo.uid) ? <Button
+                            color="primary"
+                            size="120"
+                            onClick={() => toggleEditProjectModal(true)}
+                        >
+                            Edit
+                        </Button> : <Button
                             size="120"
                             className="opacity-75"
                             startIcon={<InsertEmoticonIcon/>}
                         >
 
                             I'm In
-                        </Button>
-                        {pageData.created_by === sessionInfo.uid ? <Button
-                            color="primary"
-                            size="120"
-                            onClick={() => toggleEditProjectModal(true)}
-                        >
-                            Edit
-                        </Button> : null}
+                        </Button>)}
                     </Box>
                 </Box>
 
