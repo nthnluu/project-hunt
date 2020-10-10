@@ -96,8 +96,11 @@ export default function () {
                 </Box>
             </Paper>
     
-            <Paper>
-                <AlternateTimeline/>
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h1 className="text-2xl font-display">Timeline</h1>
+                    <AlternateTimeline/>
+                </Box>                
             </Paper>
 
 
