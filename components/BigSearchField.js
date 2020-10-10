@@ -1,16 +1,17 @@
 import Paper from "@material-ui/core/Paper";
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {IconButton} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
 import Chip from "@material-ui/core/Chip";
-import { connectHits, connectSearchBox } from 'react-instantsearch-dom';
+import {connectHits, connectSearchBox} from 'react-instantsearch-dom';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {useRouter} from "next/router";
+import TagChip from "./TagChip";
 
 
-const Hits = ({ hits }) => {
+const Hits = ({hits}) => {
     const router = useRouter()
 
     if (hits.length === 0) return null
@@ -20,7 +21,8 @@ const Hits = ({ hits }) => {
             {hits.map(hit => (
                 <ListItem button onClick={(e) => {
                     e.preventDefault()
-                    router.push(`/${hit.objectID}`)}} key={hit.objectID}>
+                    router.push(`/${hit.objectID}`)
+                }} key={hit.objectID}>
                     <ListItemText>
                         {hit.title}
                     </ListItemText>
@@ -33,14 +35,22 @@ const Hits = ({ hits }) => {
 
 const CustomHits = connectHits(Hits);
 
-const SearchBar = ({ currentRefinement, refine }) => {
+const SearchBar = ({currentRefinement, refine, hitCards, prefilledTerm}) => {
     const [isFocused, toggleIsFocused] = useState(false)
     const searchRef = useRef(null)
     const id = open ? 'transitions-popper' : undefined;
 
+    useEffect(() => {
+        if (prefilledTerm) {
+            refine(prefilledTerm)
+        }
+
+    }, [prefilledTerm])
+
     return <>
         <div className="relative">
-            <div className={`border rounded-lg ${isFocused ? "border-transparent" : "border-lightGray"}`} ref={searchRef}>
+            <div className={`border rounded-lg ${isFocused ? "border-transparent" : "border-lightGray"}`}
+                 ref={searchRef}>
                 <Paper elevation={isFocused ? 3 : 0}>
                     <div className="p-2 flex justify-start">
                         <IconButton>
@@ -58,33 +68,36 @@ const SearchBar = ({ currentRefinement, refine }) => {
 
             </div>
 
-            {isFocused && <div className="absolute w-full mt-2">
+            {(isFocused && !hitCards) && <div className="absolute w-full mt-2">
                 <CustomHits/>
             </div>}
 
+            {hitCards}
+
 
         </div>
 
 
+        {!hitCards && <div className="mt-4">
+            <TagChip tag="Startups"/>
+            <TagChip tag="Startups"/>
+            <TagChip tag="Startups"/>
+            <TagChip tag="Startups"/>
+
+        </div>}
 
 
-        <div className="mt-4">
-            <Chip variant="outlined" label="Startups" className="mr-2 mb-2"/>
-            <Chip variant="outlined" label="Social Entrepreneurship" className="mr-2 mb-2"/>
-            <Chip variant="outlined" label="Student-led Venture" className="mr-2 mb-2"/>
-            <Chip variant="outlined" label="Programming" className="mr-2 mb-2"/>
-        </div>
     </>
 }
 
 
 const ConnectedSearchBox = connectSearchBox(SearchBar);
 
-export default function () {
+export default function ({hitCards, prefilledTerm}) {
     return <>
-        <ConnectedSearchBox/>
+        <ConnectedSearchBox hitCards={hitCards} prefilledTerm={prefilledTerm}/>
 
-        </>
+    </>
 }
 
 

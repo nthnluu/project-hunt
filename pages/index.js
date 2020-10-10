@@ -75,11 +75,7 @@ export default function Index() {
                             </li>
                         })}
                     </ul>
-
-
                 </Container>
-
-
             </PageLayout>
         </>
 
