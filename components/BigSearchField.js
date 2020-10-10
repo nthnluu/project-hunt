@@ -79,11 +79,9 @@ const SearchBar = ({currentRefinement, refine, hitCards, prefilledTerm}) => {
 
 
         {!hitCards && <div className="mt-4">
+            <TagChip tag="Student Initiative"/>
+            <TagChip tag="Social Initiative"/>
             <TagChip tag="Startups"/>
-            <TagChip tag="Startups"/>
-            <TagChip tag="Startups"/>
-            <TagChip tag="Startups"/>
-
         </div>}
 
 
