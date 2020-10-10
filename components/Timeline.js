@@ -7,6 +7,7 @@ import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 
 export default function AlternateTimeline() {
+
   return (
     <Timeline align="alternate">
       <TimelineItem>
@@ -15,7 +16,7 @@ export default function AlternateTimeline() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-           <p className="mt-4 text-xl text-gray-700">First Meeting: {pageData.Timeline1}</p>
+          First Task
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
@@ -24,7 +25,7 @@ export default function AlternateTimeline() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-            <p className="mt-4 text-xl text-gray-700">Second Meeting: {pageData.Timeline2}</p>
+          Second Task
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
