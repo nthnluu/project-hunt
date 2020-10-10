@@ -10,6 +10,7 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
 import {useRouter} from "next/router";
 import NewProjectModal from '../components/modals/NewProjectModal'
+import LikeButton from "../components/LikeButton";
 
 
 export default function Index() {
@@ -46,7 +47,7 @@ export default function Index() {
                     <ul className="space-y-4 mb-8">
                         {pageData.map(item => {
                             let data = item.data()
-                            return <li>
+                            return <li key={item.id}>
                                 <Paper variant="outlined" key={item.id} className="overflow-none">
                                     <CardActionArea onClick={() => router.push(`/${item.id}`)}>
                                         <Box p={4}>
@@ -56,6 +57,9 @@ export default function Index() {
                                                 {data.description}</Typography>
                                         </Box>
                                     </CardActionArea>
+                                    <Box mx={3} mb={2}>
+                                        <LikeButton projectId={item.id}/>
+                                    </Box>
                                 </Paper>
 
                             </li>
