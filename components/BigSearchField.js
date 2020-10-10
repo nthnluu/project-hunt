@@ -68,7 +68,7 @@ const SearchBar = ({currentRefinement, refine, hitCards, prefilledTerm}) => {
 
             </div>
 
-            {(isFocused && !hitCards) && <div className="absolute w-full mt-2">
+            {(isFocused && !hitCards) && <div className="absolute w-full mt-2 z-50">
                 <CustomHits/>
             </div>}
 

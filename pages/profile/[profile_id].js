@@ -13,6 +13,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import WebIcon from '@material-ui/icons/Web';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import ProtectedRoute from "../../components/ProtectedRoute";
+import TagChip from "../../components/TagChip";
 
 export default function () {
 
@@ -93,8 +94,7 @@ export default function () {
 
                             <div className="w-full">
                                 {pageData.skills.map((skill, index) =>
-                                <Chip key={skill.id}
-                                    label={skill.value} variant="outlined" className="mr-2 mb-2"/>)
+                                    <TagChip key={skill.id} tag={skill.value}/>)
                                 }
                             </div>
                         </div>

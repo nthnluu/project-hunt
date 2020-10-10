@@ -65,14 +65,16 @@ export function ProfilePage({pageData, toggleLoading}) {
 
             <Paper variant="outlined">
                 <Box p={4}>
-                    <h2 className="text-xl font-display">{"Full name"}</h2>
+                    <h2 className="text-xl font-display">{"Full name (required)"}</h2>
                     <div className="newProjectFormPanelGrid">
                         {(noNameStatus)
                         ? <TextField error id="standard-error-helper-text" className="w-full" label="Name" variant="outlined"
                             autoComplete="off" placeholder="Max Goof" helperText="Must be filled out."
+                                     required
                             value={nameString} onChange={event => setNameString(event.target.value)} />
                         : <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined"
                                    autoComplete="off" placeholder="Max Goof"
+                                     required
                                    value={nameString} onChange={event => setNameString(event.target.value)}/>
                         }
                     </div>
@@ -134,7 +136,7 @@ export function ProfilePage({pageData, toggleLoading}) {
                 )}
             />
 
-            <Button onClick={createProfile} variant="contained" color="primary">Save</Button>
+            <Button onClick={createProfile} disabled={nameString.length < 1} variant="contained" size="large" color="primary">{pageData ? "Save" : "Continue"}</Button>
 
         </div>
     </Container>

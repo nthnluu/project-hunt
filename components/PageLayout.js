@@ -53,6 +53,18 @@ function ProfilePopper({isOpen, profilePic, toggleLoading, onClose}) {
             .catch(() => toggleLoading(false))
     }
 
+    useEffect(() => {
+        if (sessionInfo) {
+            fb.firestore().collection("profiles").doc(sessionInfo.uid)
+                .onSnapshot(function (doc) {
+                    if (!doc.data()) {
+                        router.push('/complete-profile')
+                    }
+                });
+        }
+
+    }, [sessionInfo]);
+
     function navigateToPage(route) {
         onClose()
         router.push(route)
