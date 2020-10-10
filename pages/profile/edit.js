@@ -9,6 +9,10 @@ import {TextField, Button, Container, Paper, Box, AppBar} from "@material-ui/cor
 import ProtectedRoute from "../../components/ProtectedRoute";
 
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 
 export function ProfilePage({pageData, toggleLoading}) {
 
@@ -25,7 +29,7 @@ export function ProfilePage({pageData, toggleLoading}) {
     const [skillArray, setSkillArray] = useState(pageData ? pageData.skills : [])
     const [noNameStatus, setNoNameStatus] = useState(false)
 
-    const [institutionString, setInstitutionString] = useState(pageData ? pageData.institution : "")
+    const [institutionString, setInstitutionString] = useState(pageData ? pageData.institution : "Brown University")
     const listOfInstitutions = ["Brown University", "Rhode Island School of Design"];
 
     function createProfile() {
@@ -65,18 +69,34 @@ export function ProfilePage({pageData, toggleLoading}) {
 
             <Paper variant="outlined">
                 <Box p={4}>
-                    <h2 className="text-xl font-display">{"Full name (required)"}</h2>
+                    <h2 className="text-xl font-display">{"Basic info (required)"}</h2>
                     <div className="newProjectFormPanelGrid">
                         {(noNameStatus)
-                        ? <TextField error id="standard-error-helper-text" className="w-full" label="Name" variant="outlined"
+                        ? <TextField error id="standard-error-helper-text" className="w-full" label="Full Name" variant="outlined"
                             autoComplete="off" placeholder="Max Goof" helperText="Must be filled out."
                                      required
                             value={nameString} onChange={event => setNameString(event.target.value)} />
-                        : <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined"
+                        : <TextField id="outlined-basic" className="w-full" label="Full Name" variant="outlined"
                                    autoComplete="off" placeholder="Max Goof"
                                      required
                                    value={nameString} onChange={event => setNameString(event.target.value)}/>
                         }
+                        <FormControl variant="outlined" required>
+                            <InputLabel required id="institution">Institution</InputLabel>
+                            <Select
+                                required
+                                labelId="institution"
+                                id="institution"
+                                value={institutionString}
+                                onChange={(event) =>
+                                    setInstitutionString(event.target.value)}
+                                label="Institution"
+                            >
+                                <MenuItem value="Brown University">Brown University</MenuItem>
+                                <MenuItem value="Rhode Island School of Design (RISD)">Rhode Island School of Design (RISD)</MenuItem>
+                                <MenuItem value="Other">Other</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
 
                     
@@ -122,21 +142,9 @@ export function ProfilePage({pageData, toggleLoading}) {
                              itemName="skill"
                              value={skillArray} setValue={setSkillArray}/>
 
-            <Autocomplete
-                className="form-item" options={listOfInstitutions} 
-                value={institutionString}
-                onChange={(event, value) => setInstitutionString(value)}
-                renderInput={params => (
-                    <TextField
-                        {...params}
-                        label="Institution"
-                        placeholder="Choose your school"
-                        InputLabelProps={{ shrink: true }}
-                        variant="outlined" />
-                )}
-            />
 
-            <Button onClick={createProfile} disabled={nameString.length < 1} variant="contained" size="large" color="primary">{pageData ? "Save" : "Continue"}</Button>
+
+            <Button onClick={createProfile} disabled={(nameString.length < 1) || (institutionString.length < 1)} variant="contained" size="large" color="primary">{pageData ? "Save" : "Continue"}</Button>
 
         </div>
     </Container>
