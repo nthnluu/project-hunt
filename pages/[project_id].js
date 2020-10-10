@@ -92,7 +92,7 @@ export default function () {
                 <Box p={4}>
                     <h1 className="text-2xl font-display">What we're looking for</h1>
                     {pageData.skills.length > 0 && <div className="mt-6">
-                        <h3 className="font-medium text-gray-700 mb-2">Skills I'm looking for</h3>
+                        <h3 className="font-medium text-gray-700 mb-2">Skills</h3>
                         <div>
                             {pageData.skills.map(skill =>  <TagChip key={skill.id} tag={skill.value}/>)}
                         </div>
