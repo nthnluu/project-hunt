@@ -46,7 +46,8 @@ export function ProfilePage({pageData, toggleLoading}) {
             websiteUrl: websiteLink,
             bio: bioContents,
             skills: skillArray, 
-            institution: institutionString
+            institution: institutionString, 
+            followingUsers: []
         })
             .then(function () {
                 router.push(`/profile/${sessionInfo.uid}`);

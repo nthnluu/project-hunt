@@ -67,7 +67,8 @@ export default function () {
                                         ? <Button onClick={followUser} variant="contained" color="primary">Follow</Button> 
                                         : <Button variant="contained" color="secondary">Following</Button>) }
 
-                            <div> {`(Goes to ${pageData.institution})`} </div>
+                            {(pageData.institution) && 
+                                <div> {`(Goes to ${pageData.institution})`} </div> }
                         </div>
 
                         <div className="newProjectFormPanelGrid">
