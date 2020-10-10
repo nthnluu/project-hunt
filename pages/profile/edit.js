@@ -7,17 +7,11 @@ import PageLayout from "../../components/PageLayout";
 import ArrayInputPanel from "../../components/modals/NewProjectModal/ArrayInputPanel";
 import {TextField, Button, Container, Paper, Box, AppBar} from "@material-ui/core";
 import ProtectedRoute from "../../components/ProtectedRoute";
-// import {makeStyles} from '@material-ui/core/styles';
 
-// const useStyles = makeStyles((theme) => ({
-//   socials: {
-//     margin: theme.spacing(2),
-//   },
-// }));
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 export function ProfilePage({pageData, toggleLoading}) {
 
-    // const classes = useStyles();
     const {sessionInfo} = useContext(AuthContext)
     const router = useRouter()
 
@@ -29,15 +23,18 @@ export function ProfilePage({pageData, toggleLoading}) {
     const [websiteLink, setWebsiteLink] = useState(pageData ? pageData.websiteUrl : "")
     const [bioContents, setBioContents] = useState(pageData ? pageData.bio : "")
     const [skillArray, setSkillArray] = useState(pageData ? pageData.skills : [])
+    const [noNameStatus, setNoNameStatus] = useState(false)
 
+    const [institutionString, setInstitutionString] = useState(pageData ? pageData.institution : "")
+    const listOfInstitutions = ["Brown University", "Rhode Island School of Design"];
 
     function createProfile() {
         // call this function to create the profile on FB
-        toggleLoading(true)
+        toggleLoading(true);
 
         if (nameString === "") {
             toggleLoading(false);
-            alert("Name cannot be empty");
+            setNoNameStatus(true);
             return;
         }
 
@@ -48,7 +45,8 @@ export function ProfilePage({pageData, toggleLoading}) {
             twitterUrl: twitterLink,
             websiteUrl: websiteLink,
             bio: bioContents,
-            skills: skillArray
+            skills: skillArray, 
+            institution: institutionString
         })
             .then(function () {
                 router.push(`/profile/${sessionInfo.uid}`);
@@ -68,10 +66,18 @@ export function ProfilePage({pageData, toggleLoading}) {
                 <Box p={4}>
                     <h2 className="text-xl font-display">{"Full name"}</h2>
                     <div className="newProjectFormPanelGrid">
-                        <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined"
+                        {(noNameStatus)
+                        ? <TextField error id="standard-error-helper-text" className="w-full" label="Name" variant="outlined"
+                            autoComplete="off" placeholder="Max Goof" helperText="Must be filled out."
+                            value={nameString} onChange={event => setNameString(event.target.value)} />
+                        : <TextField id="outlined-basic" className="w-full" label="Name" variant="outlined"
                                    autoComplete="off" placeholder="Max Goof"
                                    value={nameString} onChange={event => setNameString(event.target.value)}/>
+                        }
                     </div>
+
+                    
+
                 </Box>
             </Paper>
 
@@ -109,9 +115,23 @@ export function ProfilePage({pageData, toggleLoading}) {
                 </Box>
             </Paper>
 
-            <ArrayInputPanel title="Tags (eg: Institution, skills, programming and foreign languages)"
+            <ArrayInputPanel title="Tags (eg: skills, programming and foreign languages)"
                              itemName="skill"
                              value={skillArray} setValue={setSkillArray}/>
+
+            <Autocomplete
+                className="form-item" options={listOfInstitutions} 
+                value={institutionString}
+                onChange={(event, value) => setInstitutionString(value)}
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        label="Institution"
+                        placeholder="Choose your school"
+                        InputLabelProps={{ shrink: true }}
+                        variant="outlined" />
+                )}
+            />
 
             <Button onClick={createProfile} variant="contained" color="primary">Save</Button>
 
