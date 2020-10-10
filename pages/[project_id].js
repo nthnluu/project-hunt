@@ -17,6 +17,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ParticipantList from "../components/ParticipantList";
+import DeleteProject from "../components/modals/DeleteProject";
 
 
 export default function () {
@@ -25,6 +26,7 @@ export default function () {
     const {sessionInfo, authState} = useContext(AuthContext)
 
     const [isLoading, toggleLoading] = useState(true)
+    const [deleteModal, toggleDeleteModal] = useState(false)
     const [pageData, setPageData] = useState()
     const [editProjectModal, toggleEditProjectModal] = useState(false)
 
@@ -39,9 +41,19 @@ export default function () {
 
     }, [])
 
+    function deleteProject () {
+        toggleLoading(true)
+        router.push('/')
+        fb.firestore().collection("projects").doc(project_id).delete()
+            .then(function (doc) {
+                router.push('/')
+            })
+            .catch(() => toggleLoading(false))
+    }
 
 
     return <>
+        <DeleteProject  isOpen={deleteModal} onClose={() => toggleDeleteModal(false)} onDelete={deleteProject}/>
         <FullScreenDialog projectId={project_id} isOpen={editProjectModal} onClose={() => toggleEditProjectModal(false)} pageData={pageData}/>
         <PageLayout isLoading={isLoading}>
         {!isLoading && <Container maxWidth="md" className="space-y-4">
@@ -50,18 +62,27 @@ export default function () {
                     <h1 className="text-4xl font-display font-semibold text-gray-800">{pageData.title}</h1>
                     <p className="text-gray-700 text-lg mt-2 mb-4">{pageData.description}</p>
                     <Box mx={-1}>
-                        <span className="mr-2">
+                        <span>
                             <LikeButton projectId={project_id}/>
                         </span>
 
 
-                        {authState === 1 && ((pageData.created_by === sessionInfo.uid) ? <Button
-                            color="primary"
-                            size="100"
-                            onClick={() => toggleEditProjectModal(true)}
-                        >
+                        {authState === 1 && ((pageData.created_by === sessionInfo.uid) ? <span>
+                            <Button
+                                color="primary"
+                                size="100"
+                                onClick={() => toggleEditProjectModal(true)}
+                            >
                             Edit
-                        </Button> : <ImInButton projectId={project_id}/>)}
+                        </Button>
+                            <Button
+                                color="secondary"
+                                size="100"
+                                onClick={() => toggleDeleteModal(true)}
+                            >
+                            Delete
+                        </Button>
+                        </span> : <ImInButton projectId={project_id}/>)}
                     </Box>
                 </Box>
 
