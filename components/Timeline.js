@@ -15,7 +15,7 @@ export default function AlternateTimeline() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-            First Task
+           <p className="mt-4 text-xl text-gray-700">First Meeting: {pageData.Timeline1}</p>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
@@ -24,7 +24,7 @@ export default function AlternateTimeline() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-            Second Task
+            <p className="mt-4 text-xl text-gray-700">Second Meeting: {pageData.Timeline2}</p>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
