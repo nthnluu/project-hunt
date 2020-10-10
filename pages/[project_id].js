@@ -131,6 +131,13 @@ export default function () {
 
             <ParticipantList projectId={project_id}/>
 
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h1 className="text-2xl font-display">Additional information</h1>
+                    <p className="text-gray-700 text-lg mt-2 mb-4">{pageData.additionalInformation}</p>
+                </Box>
+            </Paper>
+
 
         </Container>}
 

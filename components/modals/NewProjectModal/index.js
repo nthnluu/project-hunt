@@ -52,6 +52,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
     const [skillArray, setSkillArray] = useState([])
     const [softwareArray, setSoftwareArray] = useState([])
     const [languagesArray, setLanguagesArray] = useState([])
+    const [additionalInfo, setAdditonalInfo] = useState("")
 
     const formValid = projectTitle.length > 0 && overview.length > 0
 
@@ -73,6 +74,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             setSkillArray(pageData.skills)
             setSoftwareArray(pageData.software)
             setLanguagesArray(pageData.languages)
+            setAdditonalInfo(pageData.additionalInfo)
         }
 
     }, [pageData])
@@ -92,7 +94,8 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             skills: skillArray,
             software: softwareArray,
             languages: languagesArray,
-            created_by: sessionInfo.uid
+            created_by: sessionInfo.uid, 
+            additionalInformation: additionalInfo
         })
             .then(function() {
                 if (pageData) {
@@ -231,6 +234,19 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                          itemName="languages"
                                          value={languagesArray} setValue={setLanguagesArray}/>
 
+                        <Paper variant="outlined">
+                            <Box p={4}>
+                                <h2 className="text-xl font-display">Additional Information</h2>
+                                <div className="mt-4">
+                                    <TextField multiline id="additional-info"
+                                        variant="outlined"
+                                        className="w-full"
+                                        placeholder="Start typing..."
+                                        value={additionalInfo}
+                                        onChange={event => setAdditonalInfo(event.target.value)}/>
+                                </div>
+                            </Box>
+                        </Paper>
 
                     </div>
                 </Container>
