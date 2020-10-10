@@ -7,6 +7,10 @@ import theme from '../styles/theme';
 import '../styles/tailwind.css'
 import fb from "../src/firebase-config";
 import AuthContext from "../src/AuthContext";
+import algoliasearch from 'algoliasearch/lite';
+import {
+    InstantSearch,
+} from 'react-instantsearch-dom';
 
 export default function MyApp(props) {
     const {Component, pageProps} = props;
@@ -32,20 +36,24 @@ export default function MyApp(props) {
         });
     }, []);
 
+    const searchClient = algoliasearch('NX4F36XPF6', 'afc772ef14c8ff051f6b6925ecb3726a');
+
     if (authState === 0) return null
     return (
         <React.Fragment>
-            <AuthContext.Provider value={{authState, sessionInfo}}>
-                <Head>
-                    <title>My page</title>
-                    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
-                </Head>
-                <ThemeProvider theme={theme}>
-                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                    <CssBaseline/>
-                    <Component {...pageProps} />
-                </ThemeProvider>
-            </AuthContext.Provider>
+            <InstantSearch indexName="projects" searchClient={searchClient}>
+                <AuthContext.Provider value={{authState, sessionInfo}}>
+                    <Head>
+                        <title>My page</title>
+                        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
+                    </Head>
+                    <ThemeProvider theme={theme}>
+                        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                        <CssBaseline/>
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </AuthContext.Provider>
+            </InstantSearch>
         </React.Fragment>
     );
 }

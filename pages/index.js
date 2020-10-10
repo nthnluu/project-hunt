@@ -15,7 +15,7 @@ import BigSearchField from "../components/BigSearchField";
 
 
 export default function Index() {
-    const {authState, sessionInfo} = useContext(AuthContext)
+    const {authState} = useContext(AuthContext)
     const [pageData, setPageData] = useState([])
     const [newProjectModal, setNewProjectModal] = useState(false)
 
@@ -49,7 +49,7 @@ export default function Index() {
                         <h1 className="text-2xl mx-6 md:mx-0 md:text-5xl font-semibold text-center font-display text-gray-800">
                             Share ideas with your classmates and make amazing things happen</h1>
                         <div className="my-12">
-                            <BigSearchField/>
+                           <BigSearchField/>
                         </div>
 
                     </Box>

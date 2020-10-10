@@ -13,6 +13,7 @@
 		"@material-ui/core": "latest",
 		"@material-ui/icons": "^4.9.1",
 		"@material-ui/lab": "^4.0.0-alpha.56",
+		"algoliasearch": "^4.5.1",
 		"clsx": "latest",
 		"firebase": "^7.23.0",
 		"nanoid": "^3.1.12",
@@ -20,6 +21,7 @@
 		"prop-types": "latest",
 		"react": "latest",
 		"react-dom": "latest",
+		"react-instantsearch-dom": "^6.7.0",
 		"tailwindcss": "^1.8.12"
 	},
 	"scripts": {

@@ -4,7 +4,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import MenuIcon from '@material-ui/icons/Menu';
-import Typography from "@material-ui/core/Typography";
 import {useRouter} from 'next/router'
 import Avatar from "@material-ui/core/Avatar";
 import getInitialsFromName from "../src/getInitialsFromName";
@@ -18,7 +17,6 @@ import Popper from "@material-ui/core/Popper";
 import Paper from "@material-ui/core/Paper";
 import {ClickAwayListener} from '@material-ui/core';
 import fb from "../src/firebase-config";
-import Collapse from "@material-ui/core/Collapse";
 import Grow from "@material-ui/core/Grow";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Link from "next/link";
@@ -50,7 +48,7 @@ function ProfilePopper({isOpen, profilePic, toggleLoading, onClose}) {
         toggleLoading(true)
         fb.auth().signOut().then(function () {
             toggleLoading(false)
-            router.push('')
+            window.location.href = '/'
         })
             .catch(() => toggleLoading(false))
     }
