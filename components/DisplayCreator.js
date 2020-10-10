@@ -1,16 +1,11 @@
-// import {useRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import {useEffect, useState} from "react";
 import fb from "../src/firebase-config";
 import PageLayout from "../components/PageLayout";
 import {Button, Container} from "@material-ui/core";
-// import Paper from "@material-ui/core/Paper";
-// import Box from "@material-ui/core/Box";
-// import Chip from "@material-ui/core/Chip";
-
 
 export default function DisplayCreator(props) {
-    // const router = useRouter()
-    // const {project_id} = router.query
+    const router = useRouter()
     const [isLoading, toggleLoading] = useState(true)
     const [pageData, setPageData] = useState()
 
