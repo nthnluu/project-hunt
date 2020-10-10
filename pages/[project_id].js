@@ -2,12 +2,12 @@ import {useRouter} from 'next/router'
 import React, {useContext, useEffect, useState} from "react";
 import fb from "../src/firebase-config";
 import PageLayout from "../components/PageLayout";
-import {Container} from "@material-ui/core";
+import DisplayCreator from "../components/DisplayCreator.js";
+import {Button, Container} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Chip from "@material-ui/core/Chip";
 import SaveIcon from '@material-ui/icons/Save';
-import Button from "@material-ui/core/Button";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FullScreenDialog from "../components/modals/NewProjectModal";
@@ -26,13 +26,11 @@ export default function () {
     const [editProjectModal, toggleEditProjectModal] = useState(false)
 
     useEffect(() => {
-
         fb.firestore().collection("projects").doc(project_id)
             .onSnapshot(function (doc) {
                 setPageData(doc.data())
                 toggleLoading(false)
-            });
-
+            })
     }, [])
 
     return <>
@@ -41,8 +39,9 @@ export default function () {
         {!isLoading && <Container maxWidth="md" className="space-y-4">
             <Paper variant="outlined">
                 <Box p={4}>
-                    <h1 className="text-4xl font-display font-semibold text-gray-800">{pageData.title}</h1>
-                    <p className="text-gray-700 text-lg mt-2 mb-4">{pageData.description}</p>
+                    <h1 className="text-4xl font-display font-semibold text-gray-900">{pageData.title}</h1>
+                    <p className="text-gray-700 text-lg mt-2">{pageData.description}</p>
+                    <DisplayCreator profile_id={pageData.created_by}/>
                     <Box mx={-1}>
                         <LikeButton projectId={project_id}/>
 
