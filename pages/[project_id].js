@@ -137,7 +137,9 @@ export default function () {
             <Paper variant="outlined">
                 <Box p={4}>
                     <h1 className="text-2xl font-display">Timeline</h1>
+                    <p className="mt-4 text-xl text-gray-700">{pageData.timeline1}</p>                         
                     <OutlinedTimeline/>
+                    <p className="mt-4 text-xl text-gray-700">{pageData.timeline2}</p>                                                
                 </Box>                
             </Paper>
 
