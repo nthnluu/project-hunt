@@ -29,6 +29,7 @@ export default function () {
 
     // Form Data
     const [pageData, setPageData] = useState()
+    const [userOwnData, setUserOwnData] = useState()
     const {sessionInfo} = useContext(AuthContext)
 
     // user: sessionInfo.uid,
@@ -43,14 +44,32 @@ export default function () {
             .onSnapshot(function (doc) {
                 setPageData(doc.data())
             });
-    });
+        if(sessionInfo){
+            fb.firestore().collection("profiles").doc(sessionInfo.uid)
+                .onSnapshot(function (doc) {
+                    setUserOwnData(doc.data())
+                });
+        }
+    }, [sessionInfo]);
 
     function followUser(){
-        var newFollowings = (pageData.followingUsers) ? pageData.followingUsers.push(profile_id) : [profile_id]; 
+        var newFollowings = pageData.followingUsers
+        newFollowings.push(profile_id); 
         fb.firestore().collection("profiles").doc(sessionInfo.uid).set({
             followingUsers: newFollowings
         }, { merge: true });
-        alert(`Followed user ${pageData.name}!`);
+    }
+
+    function renderFollowButton(){
+        if (profile_id == sessionInfo.uid)
+            return <div></div>;
+        else if (userOwnData && userOwnData.followingUsers.includes(profile_id)){
+            return <Button variant="contained" color="primary">Following</Button>
+        }
+        else{
+            // console.log(JSON.stringify(pageData));
+            return <Button onClick={followUser} variant="contained" color="secondary">Follow</Button> 
+        }
     }
 
     return <ProtectedRoute><PageLayout>
@@ -64,10 +83,7 @@ export default function () {
                         <div className="grid grid-cols-2">
                             <h1 className="mb-6 text-3xl font-display ">{pageData.name}</h1>
 
-                            {(profile_id !== sessionInfo.uid) &&
-                                    ((pageData.followingUsers && pageData.followingUsers.includes(profile_id))
-                                        ? <Button onClick={followUser} variant="contained" color="primary">Follow</Button> 
-                                        : <Button variant="contained" color="secondary">Following</Button>) }
+                            {renderFollowButton()}
 
                             {(pageData.institution) && 
                                 <div> {`(Goes to ${pageData.institution})`} </div> }
