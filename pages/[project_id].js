@@ -101,8 +101,10 @@ export default function () {
             <Paper variant="outlined">
                 <Box p={4}>
                     <h1 className="text-2xl font-display">GitHub README</h1>
-                    <ReadMe link={pageData.repo} />
-                    {/* <p className="mt-4 text-xl text-gray-700">{pageData.repo}</p> */}
+                    {pageData.repo ?
+                    <ReadMe link={pageData.repo} /> :
+                    <p className="mt-4 text-xl text-gray-700"> No linked GitHub 😞</p>}
+
                 </Box>
             </Paper>
     
