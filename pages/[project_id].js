@@ -139,7 +139,7 @@ export default function () {
                     <h1 className="text-2xl font-display">Timeline</h1>
                     <p className="mt-4 text-base text-center text-gray-500">{pageData.timeline1}</p>                         
                     <OutlinedTimeline/>
-                    <p className="mt-4 text-base text-center text-gray-500">{pageData.timeline2}</p>                                                
+                    <p className="mt-1 text-base text-center text-gray-500">{pageData.timeline2}</p>                                                
                 </Box>                
             </Paper>
 
