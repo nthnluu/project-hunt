@@ -1,5 +1,7 @@
 ![ProjectHunt_Main](/public/ProjectHunt_Main.jpg)
 
+> "Share ideas with your classmates and __make amazing things happen__"
+
 # About
 
 Using “Project Hunt”, ANYONE can build the best team for a project.
@@ -27,6 +29,7 @@ All they have to do is to fill in their profile, browse through the project prop
   * Skills I'm looking for
   * Software, Programming languages, and technologies
   * Foreign Languages
+  * Additional Information
   
 * Project Search
   * Tags (eg: Student initiative, Social initiative, Startups)
