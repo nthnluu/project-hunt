@@ -89,14 +89,14 @@ export default function ({projectId}) {
         </Button>
     } else{
         return <Button
-            color={isLiked ?  "primary" : "inherit"}
+            color={isLiked ? "primary" : "inherit"}
             size="100"
             disabled={isLoading}
             onClick={likeProject}
             variant={isLiked ? "outlined": null}
             startIcon={isLiked ? <CheckIcon/> : <StarBorderIcon/>}
         >
-            I Want In!
+            {isLiked ? "Request Pending" : "Send Request"}
         </Button>
     }
 }
