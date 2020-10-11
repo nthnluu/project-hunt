@@ -48,8 +48,10 @@ export default function Index() {
                 <Container maxWidth="md">
                     <Box mt={6} mb={8} >
                         <MyImage/>
+                        /*
                         <h1 className="text-2xl mx-6 md:mx-0 md:text-5xl font-semibold text-center font-display text-gray-800">
                             Share ideas with your classmates and make amazing things happen</h1>
+                        */                            
                         <div className="my-12">
                            <BigSearchField/>
                         </div>
