@@ -225,7 +225,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                     <FormControl variant="outlined">
                                             
                                             <TextField id="outlined-basic" label="Link / URL"
-                                               variant="outlined" value={timeline1}
+                                               variant="outlined" value={repo}
                                              onChange={event => setRepo(event.target.value)}/>
                                     </FormControl>  
                                     

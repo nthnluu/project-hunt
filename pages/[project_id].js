@@ -12,6 +12,7 @@ import LikeButton from "../components/LikeButton";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import TagChip from "../components/TagChip";
 import OutlinedTimeline from "../components/Timeline";
+import ReadMe from "../components/ReadMe";
 
 export default function () {
     const router = useRouter()
@@ -94,6 +95,14 @@ export default function () {
                 <Box p={4}>
                     <h1 className="text-2xl font-display">Time commitment</h1>
                     <p className="mt-4 text-xl text-gray-700">{pageData.timeCommitment} per week</p>
+                </Box>
+            </Paper>
+
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h1 className="text-2xl font-display">GitHub README</h1>
+                    <ReadMe link={pageData.repo} />
+                    {/* <p className="mt-4 text-xl text-gray-700">{pageData.repo}</p> */}
                 </Box>
             </Paper>
     
