@@ -44,7 +44,7 @@ export default function MyApp(props) {
             <InstantSearch indexName="projects" searchClient={searchClient}>
                 <AuthContext.Provider value={{authState, sessionInfo}}>
                     <Head>
-                        <title>My page</title>
+                        <title>Project Hunt</title>
                         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
                     </Head>
                     <ThemeProvider theme={theme}>

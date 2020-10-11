@@ -126,16 +126,6 @@ export default function () {
 
             <Paper variant="outlined">
                 <Box p={4}>
-                    <h1 className="text-2xl font-display">GitHub README</h1>
-                    {pageData.repo ?
-                    <ReadMe link={pageData.repo} /> :
-                    <p className="mt-4 text-xl text-gray-700"> No linked GitHub 😞</p>}
-
-                </Box>
-            </Paper>
-    
-            <Paper variant="outlined">
-                <Box p={4}>
                     <h1 className="text-2xl font-display">Timeline</h1>
                     <p className="mt-4 text-base text-center text-gray-500">{pageData.timeline1}</p>                         
                     <OutlinedTimeline/>
@@ -155,6 +145,16 @@ export default function () {
             {authState === 1 && (pageData.created_by === sessionInfo.uid) &&
                 <PendingParticipants projectId={project_id}/>
             }
+
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h1 className="text-2xl font-display">GitHub README</h1>
+                    {pageData.repo ?
+                    <ReadMe link={pageData.repo} /> :
+                    <p className="mt-4 text-xl text-gray-700"> No GitHub linked 😞</p>}
+
+                </Box>
+            </Paper>
 
         </Container>}
 
