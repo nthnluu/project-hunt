@@ -1,3 +1,5 @@
+![ProjectHunt_Main.jpg](ProjectHunt_Main.jpg)
+
 # Next.js example
 
 ## How to use
