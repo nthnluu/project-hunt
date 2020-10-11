@@ -5,10 +5,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {Divider, Paper, Button} from "@material-ui/core";
+import {useRouter} from "next/router";
 
 export default function ({projectId}) {
     const [pendingData, setPendingData] = useState()
     const [isLoading, toggleLoading] = useState(true)
+    const router = useRouter()
 
     useEffect(() => {
 
@@ -36,9 +38,12 @@ export default function ({projectId}) {
         if (displayName) {
             return <ListItem>
                 <ListItemText>
-                    {displayName}
+                    <Button onClick={() => router.push(`/profile/${profileId}`)} >
+                        {displayName}
+                    </Button>
                 </ListItemText>
                 <Button variant="outlined" color="primary" onClick={() => acceptParticipant(profileId)}> Accept </Button>
+                &nbsp;&nbsp;&nbsp;
                 <Button variant="outlined" color="secondary" onClick={() => rejectParticipant(profileId)}> Decline </Button>
                 <Divider/>
             </ListItem>
