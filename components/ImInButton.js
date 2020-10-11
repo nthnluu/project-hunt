@@ -16,7 +16,7 @@ export default function ({projectId}) {
 
     useEffect(() => {
         if (authState === 1) {
-            fb.firestore().collection("projects").doc(projectId).collection("participants").doc(sessionInfo.uid)
+            fb.firestore().collection("projects").doc(projectId).collection("pendingParticipants").doc(sessionInfo.uid)
                 .onSnapshot(function (doc) {
                     toggleLoading(false)
                     if (doc.data()) {
@@ -29,7 +29,7 @@ export default function ({projectId}) {
             toggleLoading(false)
         }
 
-        fb.firestore().collection("projects").doc(projectId).collection("participants")
+        fb.firestore().collection("projects").doc(projectId).collection("pendingParticipants")
             .onSnapshot(function (doc) {
                 setTotalLikes(doc.docs.length)
             });
@@ -42,7 +42,7 @@ export default function ({projectId}) {
         } else {
             toggleLoading(true)
             if (!isLiked) {
-                fb.firestore().collection("projects").doc(projectId).collection("participants").doc(sessionInfo.uid).set({
+                fb.firestore().collection("projects").doc(projectId).collection("pendingParticipants").doc(sessionInfo.uid).set({
                     clicked_at: new Date(),
                     profile: fb.firestore().collection("profiles").doc(sessionInfo.uid)
                 })
@@ -54,7 +54,7 @@ export default function ({projectId}) {
                         toggleLoading(false)
                     });
             } else {
-                fb.firestore().collection("projects").doc(projectId).collection("participants").doc(sessionInfo.uid).delete()
+                fb.firestore().collection("projects").doc(projectId).collection("pendingParticipants").doc(sessionInfo.uid).delete()
                     .then(function() {
                         toggleLiked(false)
                         toggleLoading(false)

@@ -18,6 +18,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ParticipantList from "../components/ParticipantList";
 import DeleteProject from "../components/modals/DeleteProject";
+import PendingParticipants from "../components/PendingParticipants";
 
 
 export default function () {
@@ -138,6 +139,9 @@ export default function () {
                 </Box>
             </Paper>
 
+            {authState === 1 && (pageData.created_by === sessionInfo.uid) &&
+                <PendingParticipants projectId={project_id}/>
+            }
 
         </Container>}
 
