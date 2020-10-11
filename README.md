@@ -12,8 +12,12 @@ After signing up, users can post project proposals with a brief description of t
 Now the best part of the app is: Users can easily "Hunt" for projects!
 All they have to do is to fill in their profile, browse through the project proposals, and send an in-app request to join a project! (Additional features such as project like included)
 
+## Demo URL 
 
-## Components
+[https://project-hunt.vercel.app/]
+*Built with React, Tailwind CSS, and Firebase*
+
+## Features
 
 * Add profile
   * Basic info (Name / Institution)
@@ -39,29 +43,12 @@ All they have to do is to fill in their profile, browse through the project prop
   * Like Project
   * Send Request / Accept
 
-
-# Next.js example
-
 ## How to use
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
-
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/nextjs
-cd nextjs
-```
-
-Install it and run:
+[Clone the repo](https://github.com/nthnluu/project-hunt) and run:
 
 ```sh
 npm install
 npm run dev
 ```
 
-or:
-
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui-org/material-ui/tree/master/examples/nextjs)
-
-## The idea behind the example
-
-[Next.js](https://github.com/zeit/next.js) is a framework for server-rendered React apps.
