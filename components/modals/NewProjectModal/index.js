@@ -49,6 +49,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
     const [timeCommitment, setTimeCommitment] = useState("1-2 hours")
     const [timeline1, setTimeline1] = useState( "")
     const [timeline2, setTimeline2] = useState ( "")
+    const [repo, setRepo] = useState ( "")
     const [skillArray, setSkillArray] = useState([])
     const [softwareArray, setSoftwareArray] = useState([])
     const [languagesArray, setLanguagesArray] = useState([])
@@ -70,6 +71,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             setTimeCommitment(pageData.timeCommitment)
             setTimeline1(pageData.timeline1)
             setTimeline2(pageData.timeline2)
+            setRepo(pageData.repo)
             setSkillArray(pageData.skills)
             setSoftwareArray(pageData.software)
             setLanguagesArray(pageData.languages)
@@ -89,6 +91,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
             timeCommitment: timeCommitment,
             timeline1: timeline1,
             timeline2: timeline2,
+            repo: repo,
             skills: skillArray,
             software: softwareArray,
             languages: languagesArray,
@@ -215,6 +218,22 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                             </Box>
                         </Paper>
 
+                        <Paper variant="outlined">
+                            <Box p={4}>
+                                <h2 className="text-xl font-display">GitHub Repository</h2>
+                                <div className="newProjectFormPanelGrid">
+                                    <FormControl variant="outlined">
+                                            
+                                            <TextField id="outlined-basic" label="Link / URL"
+                                               variant="outlined" value={timeline1}
+                                             onChange={event => setRepo(event.target.value)}/>
+                                    </FormControl>  
+                                    
+                                    <div className="w-full"/>
+                                </div>
+                            </Box>
+                        </Paper>
+
 
 
 
@@ -225,12 +244,11 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
 
                         <ArrayInputPanel title="Software, programming languages, and technologies"
                                          itemName="software"
-                            value={softwareArray} setValue={setSoftwareArray}/>
+                                         value={softwareArray} setValue={setSoftwareArray}/>
 
                         <ArrayInputPanel title="Foreign Languages"
                                          itemName="languages"
                                          value={languagesArray} setValue={setLanguagesArray}/>
-
 
                     </div>
                 </Container>

@@ -86,6 +86,7 @@ export default function () {
                             {pageData.languages.map(language => <TagChip key={language.id} tag={language.value}/>)}
                         </div>
                     </div>}
+
                 </Box>
             </Paper>
 
