@@ -19,7 +19,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ParticipantList from "../components/ParticipantList";
 import DeleteProject from "../components/modals/DeleteProject";
 import PendingParticipants from "../components/PendingParticipants";
-
+import ReadMe from "../components/ReadMe";
 
 export default function () {
     const router = useRouter()
@@ -113,6 +113,7 @@ export default function () {
                             {pageData.languages.map(language => <TagChip key={language.id} tag={language.value}/>)}
                         </div>
                     </div>}
+
                 </Box>
             </Paper>
 
@@ -120,6 +121,16 @@ export default function () {
                 <Box p={4}>
                     <h1 className="text-2xl font-display">Time commitment</h1>
                     <p className="mt-4 text-xl text-gray-700">{pageData.timeCommitment} per week</p>
+                </Box>
+            </Paper>
+
+            <Paper variant="outlined">
+                <Box p={4}>
+                    <h1 className="text-2xl font-display">GitHub README</h1>
+                    {pageData.repo ?
+                    <ReadMe link={pageData.repo} /> :
+                    <p className="mt-4 text-xl text-gray-700"> No linked GitHub 😞</p>}
+
                 </Box>
             </Paper>
     

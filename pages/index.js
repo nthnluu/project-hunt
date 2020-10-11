@@ -14,6 +14,7 @@ import LikeButton from "../components/LikeButton";
 import BigSearchField from "../components/BigSearchField";
 import ImInButton from "../components/ImInButton";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import MyImage from "../components/MainBanner"
 
 
 export default function Index() {
@@ -49,9 +50,9 @@ export default function Index() {
 
             <PageLayout>
                 <Container maxWidth="md">
-                    <Box mt={6} mb={8}>
-                        <h1 className="text-2xl mx-6 md:mx-0 md:text-5xl font-semibold text-center font-display text-gray-800">
-                            Share ideas with your classmates and make amazing things happen</h1>
+                    <Box mt={6} mb={8} >
+                        <MyImage/>
+                          
                         <div className="my-12">
                             <BigSearchField/>
                         </div>
