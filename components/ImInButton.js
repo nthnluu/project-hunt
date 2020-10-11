@@ -9,6 +9,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 export default function ({projectId}) {
     const {sessionInfo, authState} = useContext(AuthContext)
     const [isLiked, toggleLiked] = useState(false)
+    const [isAcceptedParticipant, toggleAcceptedParticipant] = useState(false)
     const [isLoading, toggleLoading] = useState(true)
     const router = useRouter()
 
@@ -18,11 +19,20 @@ export default function ({projectId}) {
         if (authState === 1) {
             fb.firestore().collection("projects").doc(projectId).collection("pendingParticipants").doc(sessionInfo.uid)
                 .onSnapshot(function (doc) {
-                    toggleLoading(false)
                     if (doc.data()) {
                         toggleLiked(true)
                     } else {
                         toggleLiked(false)
+                    }
+                });
+
+            fb.firestore().collection("projects").doc(projectId).collection("participants").doc(sessionInfo.uid)
+                .onSnapshot(function (doc) {
+                    toggleLoading(false)
+                    if (doc.data()) {
+                        toggleAcceptedParticipant(true)
+                    } else {
+                        toggleAcceptedParticipant(false)
                     }
                 });
         } else {
@@ -64,17 +74,29 @@ export default function ({projectId}) {
                     });
             }
         }
-
     }
 
-    return  <Button
-        color={isLiked ?  "primary" : "inherit"}
-        size="100"
-        disabled={isLoading}
-        onClick={likeProject}
-        variant={isLiked ? "outlined": null}
-        startIcon={isLiked ? <CheckIcon/> : <StarBorderIcon/>}
-    >
-        I'm In
-    </Button>
+    if (isAcceptedParticipant){
+        return <Button
+            color={"primary"}
+            size="100"
+            disabled={isLoading}
+            variant={"outlined"}
+            style={{ backgroundColor: 'transparent', cursor: 'default' }}
+            startIcon={<StarBorderIcon/>}
+        >
+            Official Member!
+        </Button>
+    } else{
+        return <Button
+            color={isLiked ?  "primary" : "inherit"}
+            size="100"
+            disabled={isLoading}
+            onClick={likeProject}
+            variant={isLiked ? "outlined": null}
+            startIcon={isLiked ? <CheckIcon/> : <StarBorderIcon/>}
+        >
+            I Want In!
+        </Button>
+    }
 }
