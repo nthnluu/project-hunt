@@ -5,10 +5,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {Divider, Paper, Button} from "@material-ui/core";
+import {useRouter} from "next/router";
 
 export default function ({projectId}) {
     const [pendingData, setPendingData] = useState()
     const [isLoading, toggleLoading] = useState(true)
+    const router = useRouter()
 
     useEffect(() => {
 
@@ -36,9 +38,12 @@ export default function ({projectId}) {
         if (displayName) {
             return <ListItem>
                 <ListItemText>
-                    {displayName}
+                    <Button onClick={() => router.push(`/profile/${profileId}`)} >
+                        {displayName}
+                    </Button>
                 </ListItemText>
                 <Button variant="outlined" color="primary" onClick={() => acceptParticipant(profileId)}> Accept </Button>
+                &nbsp;&nbsp;&nbsp;
                 <Button variant="outlined" color="secondary" onClick={() => rejectParticipant(profileId)}> Decline </Button>
                 <Divider/>
             </ListItem>
@@ -77,17 +82,18 @@ export default function ({projectId}) {
     if (!isLoading && pendingData.length < 1) return null
 
     return <Paper variant="outlined">
-        <Box p={4}>
-            <h1 className="text-2xl font-display">Pending members</h1>
-            {!isLoading &&  <List>
-               <ListItem>
+        {!isLoading &&  <Box p={4}>
+            <h1 className="text-2xl font-display">Pending members({pendingData.length})</h1>
+            <List>
+                <ListItem>
                     <ListItemText>
-                        {pendingData.map(value => <PartCard key={value.id} profileId={value.id}/>)}
+                        {pendingData.map(value => 
+                        <PartCard key={value.id} profileId={value.id}/>)}
                     </ListItemText>
                     <Divider/>
                 </ListItem>
-            </List>}
-        </Box>
+            </List>
+        </Box>}
     </Paper>
 
 

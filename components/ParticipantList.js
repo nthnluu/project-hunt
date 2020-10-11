@@ -4,12 +4,13 @@ import Box from "@material-ui/core/Box";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {Divider} from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
+import {Divider, Paper, Button} from "@material-ui/core";
+import {useRouter} from "next/router";
 
 
 function PartCard ({profileId}) {
     const [displayName, setDisplayName] = useState(undefined)
+    const router = useRouter()
 
     useEffect(() => {
 
@@ -21,12 +22,14 @@ function PartCard ({profileId}) {
     }, [])
 
     if (displayName) {
-        return <ListItem>
+        return <Button onClick={() => router.push(`/profile/${profileId}`)} >
+        <ListItem>
             <ListItemText>
                 {displayName}
             </ListItemText>
             <Divider/>
         </ListItem>
+        </Button>
     } else {
         return null
     }
@@ -51,21 +54,22 @@ export default function ({projectId}) {
     if (!isLoading && participantsData.length < 1) return null
 
     return <Paper variant="outlined">
-        <Box p={4}>
-            <h1 className="text-2xl font-display">Participants</h1>
-            {!isLoading &&  <List>
+        {!isLoading &&  <Box p={4}>
+            <h1 className="text-2xl font-display">Participants ({participantsData.length})</h1>
+            <List>
                <ListItem>
                     <ListItemText>
-                        {participantsData.map(value => <PartCard key={value.id} profileId={value.id}/>)}
+                        {participantsData.map(value => 
+                        <PartCard key={value.id} profileId={value.id}/>)}
                     </ListItemText>
                     <Divider/>
 
 
                 </ListItem>
 
-            </List>}
+            </List>
 
-        </Box>
+        </Box>}
     </Paper>
 
 
