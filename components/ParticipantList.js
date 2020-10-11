@@ -51,9 +51,9 @@ export default function ({projectId}) {
     if (!isLoading && participantsData.length < 1) return null
 
     return <Paper variant="outlined">
-        <Box p={4}>
-            <h1 className="text-2xl font-display">Participants</h1>
-            {!isLoading &&  <List>
+        {!isLoading &&  <Box p={4}>
+            <h1 className="text-2xl font-display">Participants ({participantsData.length})</h1>
+            <List>
                <ListItem>
                     <ListItemText>
                         {participantsData.map(value => <PartCard key={value.id} profileId={value.id}/>)}
@@ -63,9 +63,9 @@ export default function ({projectId}) {
 
                 </ListItem>
 
-            </List>}
+            </List>
 
-        </Box>
+        </Box>}
     </Paper>
 
 

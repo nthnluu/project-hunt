@@ -77,17 +77,18 @@ export default function ({projectId}) {
     if (!isLoading && pendingData.length < 1) return null
 
     return <Paper variant="outlined">
-        <Box p={4}>
-            <h1 className="text-2xl font-display">Pending members</h1>
-            {!isLoading &&  <List>
-               <ListItem>
+        {!isLoading &&  <Box p={4}>
+            <h1 className="text-2xl font-display">Pending members({pendingData.length})</h1>
+            <List>
+                <ListItem>
                     <ListItemText>
-                        {pendingData.map(value => <PartCard key={value.id} profileId={value.id}/>)}
+                        {pendingData.map(value => 
+                        <PartCard key={value.id} profileId={value.id}/>)}
                     </ListItemText>
                     <Divider/>
                 </ListItem>
-            </List>}
-        </Box>
+            </List>
+        </Box>}
     </Paper>
 
 
