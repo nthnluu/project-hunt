@@ -227,7 +227,7 @@ export default function FullScreenDialog({isOpen, onClose, pageData, projectId})
                                 <div className="newProjectFormPanelGrid">
                                     <FormControl variant="outlined">
                                         <TextField id="outlined-basic" label="Link / URL"
-                                            variant="outlined" value={repo}
+                                            variant="outlined" value={repo} placeholder="https://github.com/yourname/yourrepo"
                                             onChange={event => setRepo(event.target.value)}/>
                                     </FormControl>  
                                     
