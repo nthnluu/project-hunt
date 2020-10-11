@@ -1,4 +1,6 @@
-![ProjectHunt_Main.jpg](ProjectHunt_Main.jpg)
+![ProjectHunt_Main](/ProjectHunt_Main.jpg)
+
+
 
 # Next.js example
 
