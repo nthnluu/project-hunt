@@ -30,14 +30,8 @@ export default function () {
     // Form Data
     const [pageData, setPageData] = useState()
     const [userOwnData, setUserOwnData] = useState()
+    const [isFollowing, toggleFollowing] = useState(false)
     const {sessionInfo} = useContext(AuthContext)
-
-    // user: sessionInfo.uid,
-    // githubUrl: githubLink, 
-    // linkedinUrl: linkedinLink, 
-    // twitterUrl: twitterLink, 
-    // bio: bioContents, 
-    // skills: skillArray
 
     useEffect(() => {
         fb.firestore().collection("profiles").doc(profile_id)
@@ -49,25 +43,34 @@ export default function () {
                 .onSnapshot(function (doc) {
                     setUserOwnData(doc.data())
                 });
+
+            toggleFollowing(userOwnData && userOwnData.followingUsers.includes(profile_id));
         }
     }, [sessionInfo]);
 
     function followUser(){
         var newFollowings = pageData.followingUsers
-        newFollowings.push(profile_id); 
+        if (isFollowing){
+            var index = newFollowings.indexOf(profile_id);
+            if (index > -1)
+                newFollowings.splice(index, 1)
+            toggleFollowing(false);
+        }
+        else{
+            newFollowings.push(profile_id); 
+            toggleFollowing(true);
+        }
         fb.firestore().collection("profiles").doc(sessionInfo.uid).set({
             followingUsers: newFollowings
         }, { merge: true });
     }
 
     function renderFollowButton(){
-        if (profile_id == sessionInfo.uid)
+        if (profile_id == sessionInfo.uid){
             return <div></div>;
-        else if (userOwnData && userOwnData.followingUsers.includes(profile_id)){
-            return <Button variant="contained" color="primary">Following</Button>
-        }
-        else{
-            // console.log(JSON.stringify(pageData));
+        } else if (isFollowing){
+            return <Button onClick={followUser} variant="contained" color="primary">Following</Button>
+        } else{
             return <Button onClick={followUser} variant="contained" color="secondary">Follow</Button> 
         }
     }
