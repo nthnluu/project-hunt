@@ -9,16 +9,7 @@ import fb from "../src/firebase-config";
 
 export default function OutlinedTimeline() {
   
-    useEffect(() => {
 
-        fb.firestore().collection("projects").doc(project_id)
-            .onSnapshot(function (doc) {
-                setPageData(doc.data())
-                toggleLoading(false)
-            });
-
-
-    }, [])
   
   return (
     <Timeline align="alternate">
@@ -27,7 +18,7 @@ export default function OutlinedTimeline() {
           <TimelineDot variant="outlined" />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>First Meeing: {pageData.timeline1}</TimelineContent>
+        <TimelineContent>First Meeing</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
